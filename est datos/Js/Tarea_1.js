@@ -1,9 +1,9 @@
 let arr = [1, 2, 3, 4, 5];
- console.log("desea ver el contenido del array? (si/no)");
- let respuesta = prompt();
- if (respuesta = "si")
-    console.log(arr);
+ let respuesta = prompt("desea ver el contenido del array? (si/no)");
+ 
+ if (respuesta.toLowerCase === "si")
+    alert("El contenido del arreglo es: " + arr);
  else 
-    console.log("ok, adiós");
+    alert("ok, adiós")
 
  
