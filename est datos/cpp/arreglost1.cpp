@@ -11,7 +11,8 @@ int main() {
 
     vector<string> arr(tamaño);
 
-    cout << "Vamos a llenar el arreglo" << "\n\n";
+    cout << "Vamos a llenar el arreglo";
+    cout << endl;
 
     for (int i=0 ; i<tamaño ; i++){
         cout << "Ingrese el elemento # " << i+1 << ":" << endl;
@@ -20,7 +21,7 @@ int main() {
 
     for (int i=0 ; i< tamaño ; i++){
         cout << arr[i] << endl;
-        cout << endl;
+        cout << endl;   
     }
 
     return 0;
