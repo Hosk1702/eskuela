@@ -6,9 +6,9 @@ for (int i = 0 ; i<tam ; i++){
     if (arr[i] == dato)
     {
         return i;
-    } else {
-        return -1;}
+    }
 }
+return -1;
 }
 
 
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
     int position = buscar(arr, tam, dato);
 
          if (position != -1){
-        cout << "El numero " << dato << " se encuentra en la posicion " << position << " del arreglo." << endl;
+        cout << "El numero " << dato << " se encuentra en la posicion " << (position+1) << " del arreglo." << endl;
     } else{
         cout << "El numero " << dato << " no se encuentra en el arreglo." << endl;
     }

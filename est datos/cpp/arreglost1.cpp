@@ -5,7 +5,7 @@ using namespace std;
 int main() {
     int tamaño;
 
-    cout << "De que tamaño desea su arreglo? endl";
+    cout << "De que tamaño desea su arreglo? " << endl;
     cin >> tamaño;
     cin.ignore(); // Limpiar el buffer de entrada
 
