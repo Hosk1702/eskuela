@@ -19,6 +19,6 @@ public class Tarea_1{
         System.out.println("El valor de la posicion " + (i+1) + " es: " + array[i]);
     }
 
-
+sc.close();
 }
 }
