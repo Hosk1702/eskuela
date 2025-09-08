@@ -27,12 +27,11 @@ int main(int argc, char const *argv[])
         
     }
 
-
-    bool j = true;
+        int opcion;
+    
     do
     {
         cout << "De que manera desea ver la matriz? (1 para filas y columnas, 0 para columnas y filas)" << '\n';
-        int opcion;
         cin >> opcion;
 
         if (opcion != 1 && opcion != 0)
@@ -45,7 +44,6 @@ int main(int argc, char const *argv[])
                 }
                 cout << endl;
             }
-            j=false;
         }else if (opcion == 0){
             for (int i = 0; i< columnas ; i++){
                 for (int j =0; j< filas ; j++){
@@ -53,9 +51,8 @@ int main(int argc, char const *argv[])
                 }
                 cout << endl;
             }
-            j=false;
         }
-    } while (j==true);
+    } while (opcion != 1 && opcion != 0);
 
     cout << "Gracias por usar el programa!" << '\n';
     
