@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
+#include <limits>
 using namespace std;
 
 bool validaciones(int fila, int columna, char gatito[3][3]){
-if (fila < 1 || fila > 3 || columna < 1 || columna > 3){ // verificamos si la posicion ya esta ocupada
+if (fila < 1 || fila > 3 || columna < 1 || columna > 3){ // verificamos si la posicion es valida
         cout << "Posicion no valida, intente de nuevo \n";
         return true;
     }
-    else if (gatito[fila-1][columna-1] != ' '){ // verificamos si la posicion es valida
+    else if (gatito[fila-1][columna-1] != ' '){ // verificamos si la posicion esta ocupada
         cout << "Esa posicion ya esta ocupada, intente de nuevo \n";
         return true;
     }
@@ -86,8 +87,13 @@ int main(int argc, char const *argv[])
         cin >> fila;
         cout << "Ingrese la columna donde quiere poner la X \n";
         cin >> columna;
-
-        if (validaciones(fila,columna,gatito) == true){ // verificamos si la posicion ya esta ocupada o si es valida
+        if (cin.fail()){
+            movimientos--;
+            cout << "Error ingrese un numero entero \n";
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //limpia la entrada del cin
+            continue;
+        }else if (validaciones(fila,columna,gatito) == true){ // verificamos si la posicion ya esta ocupada o si es valida
             movimientos = movimientos - 1;
             continue;
         }else{
@@ -101,7 +107,13 @@ int main(int argc, char const *argv[])
         cout << "Ingrese la columna donde quiere poner la O \n";
         cin >> columna;
 
-        if (validaciones(fila,columna,gatito) == true){ // verificamos si la posicion ya esta ocupada o si es valida
+        if (cin.fail()){
+            movimientos--;
+            cout << "Error ingrese un numero entero \n";
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }else if (validaciones(fila,columna,gatito) == true){ // verificamos si la posicion ya esta ocupada o si es valida
             movimientos = movimientos - 1;
             continue;
         }else{
@@ -123,7 +135,7 @@ int main(int argc, char const *argv[])
     do{ // ciclo para validar la respuesta del usuario
     cout << "Desea jugar de nuevo? (si/no) \n";
     cin >> jugar_de_nuevo;
-    if (jugar_de_nuevo != "si" | jugar_de_nuevo != "no"){ // si la respuesta no es valida, se le pide al usuario que intente de nuevo
+    if (jugar_de_nuevo != "si" && jugar_de_nuevo != "no"){ // si la respuesta no es valida, se le pide al usuario que intente de nuevo
         cout << "Respuesta no valida, intente de nuevo \n";
     }
     movimientos = 0;
