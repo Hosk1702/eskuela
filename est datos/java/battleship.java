@@ -1,6 +1,7 @@
 import java.util.Scanner;
-
+//Revisado 26/09/25 centro de computo
 public class battleship {
+    
     public static String[][]  limpiar_arr(){
         String[][] arr = new String[10][10];
           for (int i = 0; i < 10 ; i++){
@@ -25,7 +26,7 @@ public class battleship {
 
     }
 
-    public static String[][] insertar(String[][] arr, int pos, Scanner sc, String jugador){
+    public static String[][] insertar(String[][] arr, Scanner sc, String jugador,int size){
         int fila,columna;
         boolean colocado = true;
         do{
@@ -33,16 +34,26 @@ public class battleship {
         fila = sc.nextInt();
         System.out.println("Ingrese la columna de inicio (0-9):");
         columna = sc.nextInt();
+        System.out.println("De que manera desea poner su barco(Horizontal. 1; Vertical. 2)");
+            int pos = sc.nextInt();
 
         if (pos == 1){
-            for (int i = 0; i < 4 ; i++){
+            if (columna+pos > 10 && fila+pos >10){
+                colocado = false;
+            }else{
+            for (int i = 0; i < size ; i++){
             arr[fila][columna + i] = jugador;
             colocado = true;
             }
+            }
         }else if (pos == 2){
-            for (int i = 0; i < 4 ; i++){
+            if (columna+pos > 10 && fila+pos >10){
+                colocado = false;
+            }else{
+            for (int i = 0; i < size ; i++){
             arr[fila+i][columna] = jugador;
             colocado = true;
+            }
             }
         }else{
             colocado = false;
@@ -54,13 +65,29 @@ public class battleship {
         }while(!colocado);
         return arr;
     }
-
+    
+    public static int tamaño(int size){
+        switch (size){
+            case 1:
+                return 2;
+            case 2:
+                return 3;
+            case 3:
+                return 3;
+            case 4:
+                return 4;
+            case 5:
+                return 5;
+        }
+        return 0;
+        
+    }
 
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String[][] arr = limpiar_arr(); 
-
+        int size;
         imprimir(arr);
         String jugador = "X";
         int turno = 1 ;
@@ -73,10 +100,13 @@ public class battleship {
             }
 
             System.out.println("Es turno del jugador " + jugador + ":");
-            System.out.println("De que manera desea poner su barco (4 piezas) (Horizontal. 1; Vertical. 2)");
-            int pos = sc.nextInt();
+            System.out.println("Que barco desea colocar?");
+            System.out.println("1.Destructor(2 Size), 2.Submarino(3 Size), 3.Cruzero(3 size), 4.Acorazado(4.size), 5.Portaviones (5 size)");
+            size = sc.nextInt();
+            size = tamaño(size);
+            
 
-            arr = insertar(arr, pos, sc,jugador);
+            arr = insertar(arr, sc,jugador,size);
             imprimir(arr);
         }while(true);
 
@@ -84,4 +114,3 @@ public class battleship {
 
 
 }
-
