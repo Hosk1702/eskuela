@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     cout << "Ingrese la cantidad de numeros que desea ver de la sucesion: \n";
     cin >> num;
 
-    for (int i=0; i <= num;i++){
+    for (int i=0; i < num;i++){
         cout << fibonacci(i) << " ";
     }
     return 0;
