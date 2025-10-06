@@ -209,11 +209,25 @@ public class Jugador {
         tab.imprimir_resul(tab.resultJBGF(ataque, comp));
     }
 
+    public void fuego_ataque_JB_PVP(Jugador oponente, Coordenadas ataque){
+        tab.imprimir_resul(tab.resultJBGF(ataque, oponente)); 
+    }
     
     public boolean buscar_ganador(Computadora c){ 
         for(int i = 1; i < c.obt_tabA().length; i++){
             for (int j = 1; j < c.obt_tabA()[0].length; j++){ 
                 if(c.obt_tabA()[i][j] != ' ' && c.obt_tabA()[i][j] != 'X'){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+   public boolean buscar_ganador(Jugador oponente){ 
+        for(int i = 1; i < oponente.obt_tabA().length; i++){
+            for (int j = 1; j < oponente.obt_tabA()[0].length; j++){ 
+                if(oponente.obt_tabA()[i][j] != ' ' && oponente.obt_tabA()[i][j] != 'X'){
                     return false;
                 }
             }

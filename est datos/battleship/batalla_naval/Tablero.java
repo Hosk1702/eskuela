@@ -149,14 +149,17 @@ public class Tablero {
                 System.out.println("Has hundido el acorazado de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
-            numCruceroJB++;
-            if (numCruceroJB == 6){
+            if (numCruceroJB == 3){
                 System.out.println("Has hundido los cruceros de tu oponente!");
+            }else if(numCruceroJB == 6){
+                System.out.println("Has hundido todos los cruceros de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJB++;
-            if (numSubmarinoJB == 6){
-            System.out.println("Has hundido los submarinos de tu oponente!");
+            if (numSubmarinoJB == 3){
+                System.out.println("Has hundido los submarinos de tu oponente!");
+            }else if(numSubmarinoJB == 6){
+                System.out.println("Has hundido todos los submarinos de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'D'){
             numDesctructorJB++;
@@ -171,6 +174,55 @@ public class Tablero {
             return 'H';
         }else {
             this.obt_tabB()[ycord][xcord] = 'M';
+            return 'M';
+        }
+    }
+
+    public char resultJBGF(Coordenadas crd, Jugador oponente ){
+        int xcord = crd.conseguir_X();
+        int ycord = crd.conseguir_Y();
+
+        if(oponente.obt_tabA()[ycord][xcord] == 'P'){
+            numPortavionesJB++;
+            if (numPortavionesJB == 5){
+                System.out.println("Has hundido el portaviones de tu oponente!");
+            }
+        }else if(oponente.obt_tabA()[ycord][xcord] == 'A'){
+            numAcorazadoJB++;
+            if (numAcorazadoJB == 4){
+                System.out.println("Has hundido el acorazado de tu oponente!");
+            }
+        }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
+            if (numCruceroJB == 3){
+                System.out.println("Has hundido los cruceros de tu oponente!");
+            }else if(numCruceroJB == 6){
+                System.out.println("Has hundido todos los cruceros de tu oponente!");
+            }
+        }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
+            numSubmarinoJB++;
+            if (numSubmarinoJB == 3){
+                System.out.println("Has hundido los submarinos de tu oponente!");
+            }else if(numSubmarinoJB == 6){
+                System.out.println("Has hundido todos los submarinos de tu oponente!");
+            }
+        }else if(oponente.obt_tabA()[ycord][xcord] == 'D'){
+            numDesctructorJB++;
+            if (numDesctructorJB == 2){
+                System.out.println("Has hundido el destructor de tu oponente!");
+            }
+        }
+
+        char targetChar = oponente.obt_tabA()[ycord][xcord];
+
+        if (targetChar == 'P' || targetChar == 'A' || targetChar == 'C' || targetChar == 'S' || targetChar == 'D') {
+            this.obt_tabB()[ycord][xcord] = 'H';
+            oponente.obt_tabA()[ycord][xcord] = 'X'; 
+            return 'H';
+        } else {
+            if (targetChar == ' ') { 
+                this.obt_tabB()[ycord][xcord] = 'M';
+                oponente.obt_tabA()[ycord][xcord] = 'M'; 
+            }
             return 'M';
         }
     }
@@ -192,13 +244,17 @@ public class Tablero {
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
             numCruceroJA++;
-            if (numCruceroJA == 6){ 
-                System.out.println("Tu oponente ha hundido tus cruceros!");
+            if (numCruceroJA == 3){ 
+                System.out.println("Tu oponente ha hundido uno de tus cruceros!");
+            }else if(numCruceroJA == 6){
+                System.out.println("Tu oponente ha hundido todos tus cruceros");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJA++;
-            if (numSubmarinoJA == 6){ 
-                System.out.println("Tu oponente ha hundido tus submarinos!");
+            if (numSubmarinoJA == 3){ 
+                System.out.println("Tu oponente ha hundido uno de tus submarinos!");
+            }else if(numSubmarinoJA == 6){
+                System.out.println("Tu oponente ha hundido todos tus submarinos");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'D'){
             numDesctructorJA++;
