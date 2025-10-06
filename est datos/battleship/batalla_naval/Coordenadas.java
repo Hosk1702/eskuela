@@ -5,21 +5,21 @@ public class Coordenadas{
     private int xcoord;
     private int ycoord;
 
-    public coordenada(){
+    public Coordenadas(){
         xcoord = 1;
         ycoord = 1;
     }
 
-    public coordenada(int x, int y){
+    public Coordenadas(int x, int y){
         xcoord = x;
         ycoord = y;
     }
 
-    public conseguir_X(){
+    public int conseguir_X(){
         return xcoord;
     }
-    
-    public conseguir_Y(){
+
+    public int conseguir_Y(){
         return ycoord;
     }
 

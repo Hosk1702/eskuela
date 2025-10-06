@@ -1,4 +1,5 @@
 package batalla_naval;
+import batalla_naval.Coordenadas;
 
 public class Ship {
     private int tam;
@@ -6,7 +7,10 @@ public class Ship {
     private char direccion;
     public Coordenadas coord;
 
-    public barco(char let, char dir, Coordenadas crd){
+    public Ship(char let, char dir, Coordenadas crd){
+        letra = let;
+        direccion = dir;
+        coord = crd;
         switch (let) {
             case 'P':
                 tam = 5; 
@@ -14,7 +18,7 @@ public class Ship {
             case 'A':
                 tam = 4;
                 break;
-            case 'C' || 'S':
+            case 'C': case 'S':
                 tam = 3;
                 break;
             default:

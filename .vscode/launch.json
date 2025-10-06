@@ -3,5 +3,13 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Batalla_naval_main",
+            "request": "launch",
+            "mainClass": "batalla_naval.Batalla_naval_main",
+            "projectName": "eskuela_8444d23a"
+        }
+    ]
 }
