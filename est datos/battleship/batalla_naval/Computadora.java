@@ -41,7 +41,17 @@ public class Computadora {
         }
 
         tab.colocar_barcos(crd, crucero);
-
+        
+        direccion = randomDireccion();
+        crd = randomCoordenadas();
+        Ship crucero2 = new Ship('C',direccion,crd);
+        while (!tab.posicion_valida(crd, crucero2)) {
+            direccion = randomDireccion(); // También es bueno cambiar la dirección aleatoriamente
+            crd = randomCoordenadas();
+            crucero2 = new Ship('C',direccion,crd);
+        }
+        tab.colocar_barcos(crd, crucero2);
+        
         direccion = randomDireccion();
         crd = randomCoordenadas();
         Ship submarino = new Ship('S',direccion,crd);
@@ -51,6 +61,17 @@ public class Computadora {
         }
 
         tab.colocar_barcos(crd, submarino);
+
+        direccion = randomDireccion();
+        crd = randomCoordenadas();
+        Ship submarino2 = new Ship('S',direccion,crd);
+        while (tab.posicion_valida(crd, submarino2) == false) { 
+            direccion = randomDireccion();
+            crd = randomCoordenadas();
+            submarino2 = new Ship('S',direccion,crd);
+        }
+        
+        tab.colocar_barcos(crd, submarino2);
 
         direccion = randomDireccion();
         crd = randomCoordenadas();
@@ -87,10 +108,10 @@ public class Computadora {
 
             if(tab.resultJAGF(c, j) == 'H'){
                 obtenido = elegir_adyacente(c);
-                int rnd  = (int)(Math.random() * obtenido.size() + 1); 
+                int rnd  = (int)(Math.random() * obtenido.size()); 
 
                 while (!tab.valid_ataque(obtenido.get(rnd)) || tab.obt_tabB()[obtenido.get(rnd).conseguir_Y()][obtenido.get(rnd).conseguir_X()] != ' ') {
-                    rnd  = (int)(Math.random() * obtenido.size() + 1); 
+                    rnd  = (int)(Math.random() * obtenido.size()); 
                 }
 
                 cord.add(obtenido.get(rnd));
@@ -112,14 +133,14 @@ public class Computadora {
         int x = crd.conseguir_X();
         int y = crd.conseguir_Y();
 
-        // Movimientos: arriba, abajo, izquierda, derecha
+       
         int[][] movimientos = { {0,1}, {0,-1}, {1,0}, {-1,0} };
 
         for (int[] mov : movimientos) {
             int nx = x + mov[0];
             int ny = y + mov[1];
-            // Verifica que esté dentro del tablero 10x10
-            if (nx >= 0 && nx < 10 && ny >= 0 && ny < 10) {
+            
+            if (nx >= 1 && nx < 10 && ny >= 1 && ny < 10) {
             adyacentes.add(new Coordenadas(nx, ny));
             }
         }
@@ -129,12 +150,12 @@ public class Computadora {
     public boolean buscar_ganadorC(Jugador j){
         for (int i = 1; i < j.obt_tabA().length; i++){
             for (int k = 1; k < j.obt_tabA()[0].length; k++){
-                if(j.obt_tabA()[i][k] != ' ' || tab.obt_tabB()[i][k] != 'X'){
+                if(j.obt_tabA()[i][k] != ' ' && j.obt_tabA()[i][k] != 'X'){
                     return false;
                 }
             }
         }
-        return true;
+        return true; 
     }
 
     public char randomDireccion(){
@@ -152,8 +173,8 @@ public class Computadora {
     }
 
     public Coordenadas randomCoordenadas(){
-        int num1 = (int)(Math.random() * 9) + 1;
-        int num2 = (int)(Math.random() * 9) + 1;
+        int num1 = (int)(Math.random() * 10) + 1;
+        int num2 = (int)(Math.random() * 10) + 1;
 
         return new Coordenadas(num1,num2);
     }

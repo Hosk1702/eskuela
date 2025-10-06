@@ -17,10 +17,9 @@ public class Batalla_naval_main {
             c.fuego_ataque_JA(j1, ataque_a_j);
 
             System.out.println("TABLERO A: ");
-            j1.imprimir_tab(j1.obt_tabA());
-            
+            j1.tab.imprimir_tabA(); 
             System.out.println("TABLERO B: ");
-            j1.imprimir_tab(j1.obt_tabB());
+            j1.tab.imprimir_tabB(); 
         }
 
         if(j1.buscar_ganador(c)){

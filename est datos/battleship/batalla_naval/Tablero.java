@@ -2,9 +2,8 @@ package batalla_naval;
 
 public class Tablero {
     
-
-    private char[][] tabA = new char[10][10];
-    private char[][] tabB = new char[10][10];
+    private char[][] tabA = new char[11][11]; 
+    private char[][] tabB = new char[11][11]; 
 
     private int numPortavionesJA = 0;
     private int numAcorazadoJA = 0;
@@ -26,19 +25,17 @@ public class Tablero {
     public void inictabA(){
         tabA[0][0] = ' ';
         int num = 1;
-        for (int i = 48; i <=57; i++){
+        // Etiqueta 1 a 9
+        for (int i = 49; i <=57; i++){
             tabA[num][0] = (char) i;
+            tabA[0][num] = (char) i;
             num ++;
         }
+        tabA[10][0] = '0'; 
+        tabA[0][10] = '0'; 
 
-        num = 1;
-        for (int i = 48; i <=57; i++){
-            tabA[0][num] = (char) i;
-            num ++ ;
-        }
-
-        for (int i = 0; i < tabA.length ; i++){
-            for (int j =0 ; j < tabA[0].length; j++){
+        for (int i = 1; i < tabA.length ; i++){ 
+            for (int j =1 ; j < tabA[0].length; j++){ 
                 tabA[i][j] = ' ';
             }         
             }
@@ -47,71 +44,72 @@ public class Tablero {
     public void inictabB(){
         tabB[0][0] = ' ';
         int num = 1;
-        for (int i = 48; i <=57; i++){
+        for (int i = 49; i <=57; i++){
             tabB[num][0] = (char) i;
-            num ++ ;
-        }
-
-        num = 1;
-        for (int i = 48; i <=57; i++){
             tabB[0][num] = (char) i;
             num ++;
         }
+        tabB[10][0] = '0'; 
+        tabB[0][10] = '0'; 
 
-        for (int i = 0; i < tabB.length ; i++){
-            for (int j =0 ; j < tabB[0].length; j++){
+        for (int i = 1; i < tabB.length ; i++){ 
+            for (int j =1 ; j < tabB[0].length; j++){ 
                 tabB[i][j] = ' ';
             }         
             }
     }   
 
+   
+
     public boolean posicion_valida(Coordenadas crd, Ship b){
         int xcord = crd.conseguir_X();
         int ycord = crd.conseguir_Y();
 
-        if (xcord < 1 || xcord >= tabA[0].length){
+        if (xcord < 1 || xcord > 10){ 
             return false;
         }
-        if (ycord < 1 || ycord >= tabA.length){
+        if (ycord < 1 || ycord > 10){ 
             return false;
         }
+
+       
 
         if (b.obt_dir() == 'u'){
-            if(ycord - (b.obt_tam() + 1) < 1){
+            if(ycord - (b.obt_tam() - 1) < 1){
                 return false;
             }
-
-            for(int i = ycord ; i > ycord - b.obt_tam(); i--){
+           
+            for(int i = ycord ; i >= ycord - (b.obt_tam() - 1); i--){
                 if(tabA[i][xcord] != ' '){
                     return false;
                 }
             }
-        } else if(b.obt_dir() == 'd'){
-            if(ycord + (b.obt_tam() + 1) >= tabA.length){
+        } else if(b.obt_dir() == 'd'){ 
+            if(ycord + (b.obt_tam() - 1) > 10){ 
                 return false;
             }
-
+           
             for(int i = ycord ; i <= ycord + (b.obt_tam() - 1); i++){
                 if(tabA[i][xcord] != ' '){
                     return false;
                 }
             }
-        } else if(b.obt_dir() == 'r'){
-            if(xcord + (b.obt_tam() - 1) >= tabA[0].length){
+        } else if(b.obt_dir() == 'r'){ 
+            if(xcord + (b.obt_tam() - 1) > 10){ 
                 return false;
             }
-
-            for(int i = xcord ; i <= xcord - (b.obt_tam() - 1); i++){
+            for(int i = xcord ; i <= xcord + (b.obt_tam() - 1); i++){
                 if(tabA[ycord][i] != ' '){
                     return false;
                 }
             }
-        } else if(b.obt_dir() == 'l'){
-            if(xcord - (b.obt_tam() + 1) < 1){
+        } else if(b.obt_dir() == 'l'){ 
+            
+            if(xcord - (b.obt_tam() - 1) < 1){
                 return false;
             }
-
-            for(int i = xcord ; i > xcord - (b.obt_tam()); i--){
+            
+            for(int i = xcord ; i >= xcord - (b.obt_tam() - 1); i--){
                 if(tabA[ycord][i] != ' '){
                     return false;
                 }
@@ -125,11 +123,11 @@ public class Tablero {
         int xcord = crd.conseguir_X();
         int ycord = crd.conseguir_Y()   ;
 
-        if(xcord < 1 || xcord >= tabA[0].length){
+        if(xcord < 1 || xcord > 10){
             return false;
         }
         
-        if(ycord < 1 || ycord >= tabA.length){
+        if(ycord < 1 || ycord > 10){
             return false;
         }
 
@@ -152,13 +150,13 @@ public class Tablero {
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
             numCruceroJB++;
-            if (numCruceroJB == 3){
-                System.out.println("Has hundido el crucero de tu oponente!");
+            if (numCruceroJB == 6){
+                System.out.println("Has hundido los cruceros de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJB++;
-            if (numSubmarinoJB == 3){
-                System.out.println("Has hundido el submarino de tu oponente!");
+            if (numSubmarinoJB == 6){
+            System.out.println("Has hundido los submarinos de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'D'){
             numDesctructorJB++;
@@ -181,6 +179,7 @@ public class Tablero {
         int xcord = crd.conseguir_X();
         int ycord = crd.conseguir_Y();
 
+
         if(oponente.obt_tabA()[ycord][xcord] == 'P'){
             numPortavionesJA++;
             if (numPortavionesJA == 5){
@@ -193,13 +192,13 @@ public class Tablero {
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
             numCruceroJA++;
-            if (numCruceroJA == 3){
-                System.out.println("Tu oponente ha hundido tu crucero!");
+            if (numCruceroJA == 6){ 
+                System.out.println("Tu oponente ha hundido tus cruceros!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJA++;
-            if (numSubmarinoJA == 3){
-                System.out.println("Tu oponente ha hundido tu submarino!");
+            if (numSubmarinoJA == 6){ 
+                System.out.println("Tu oponente ha hundido tus submarinos!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'D'){
             numDesctructorJA++;
@@ -207,16 +206,23 @@ public class Tablero {
                 System.out.println("Tu oponente ha hundido tu destructor!");
             }
         }
+        
+        char targetChar = oponente.obt_tabA()[ycord][xcord];
 
-        if(oponente.obt_tabA()[ycord][xcord] != ' '){
-            oponente.obt_tabA()[ycord][xcord] = 'X';
-            this.obt_tabB()[ycord][xcord] = 'H';
+        
+        if (targetChar == 'P' || targetChar == 'A' || targetChar == 'C' || targetChar == 'S' || targetChar == 'D') {
+            oponente.obt_tabA()[ycord][xcord] = 'X'; 
+            this.obt_tabB()[ycord][xcord] = 'H'; 
             return 'H';
-        }else {
-            this.obt_tabB()[ycord][xcord] = 'M';
+        } else {
+            if (targetChar == ' ') { 
+                oponente.obt_tabA()[ycord][xcord] = 'M'; 
+                this.obt_tabB()[ycord][xcord] = 'M'; 
+            }
             return 'M';
         }
     }
+    
 
     public void imprimir_resul(char resul){
         if(resul == 'M'){
@@ -226,31 +232,34 @@ public class Tablero {
         }
     }
 
+
+
     public void colocar_barcos(Coordenadas crd, Ship b){
         int xcord = crd.conseguir_X();
         int ycord = crd.conseguir_Y();
 
+        
         tabA[ycord][xcord] = b.obt_letra();
 
+       
         if(b.obt_dir() == 'u'){
-            for(int i = ycord; i >= ycord - (b.obt_tam() - 1); i--){
+            for(int i = ycord - 1; i >= ycord - (b.obt_tam() - 1); i--){
                 tabA[i][xcord] = b.obt_letra();
             }
         }else if(b.obt_dir() == 'd'){
-            for(int i = ycord; i <= ycord + (b.obt_tam() - 1); i++){
+            for(int i = ycord + 1; i <= ycord + (b.obt_tam() - 1); i++){
                 tabA[i][xcord] = b.obt_letra();
             }
         }else if(b.obt_dir() == 'r'){
-            for(int i = xcord; i <= xcord + (b.obt_tam() - 1); i++){
+            for(int i = xcord + 1; i <= xcord + (b.obt_tam() - 1); i++){
                 tabA[ycord][i] = b.obt_letra();
             }
         }else if(b.obt_dir() == 'l'){
-            for(int i = xcord; i >= xcord - (b.obt_tam() - 1); i--){
+            for(int i = xcord - 1; i >= xcord - (b.obt_tam() - 1); i--){
                 tabA[ycord][i] = b.obt_letra();
             }
         }
     }
-
     public char[][] obt_tabA(){
         return tabA;
     }
@@ -258,25 +267,57 @@ public class Tablero {
         return tabB;
     }   
 
+    
+
     public void imprimir_tabA(){
-        for (int i = 0; i < tabA.length ; i++){
-            System.out.print(i + "| ");
-            for (int j =0 ; j < tabA[0].length; j++){
-                System.out.print(tabA[i][j] + " | ");
+        System.out.print("   ");
+        
+        for (int j = 1; j < tabA[0].length - 1; j++){ 
+            System.out.print("| " + tabA[0][j] + " "); 
+        }
+        System.out.print("| 10");
+        System.out.println("|"); 
+        
+        System.out.println("-------------------------------------------"); 
+
+
+        
+        for (int i = 1; i < tabA.length ; i++){ 
+            if(i < 10) { 
+                System.out.print(tabA[i][0] + "  |"); 
+            } else {
+                System.out.print("10 |");
+            }
+            for (int j = 1 ; j < tabA[0].length; j++){ 
+                System.out.print(" " + tabA[i][j] + " |");
             }
             System.out.println();
-            System.out.println("------------------------------------------");
+            System.out.println("-------------------------------------------");
         }
     }
 
+   
+    
     public void imprimir_tabB(){
-        for (int i = 0; i < tabB.length ; i++){
-            System.out.print(i + "| ");
-            for (int j =0 ; j < tabB[0].length; j++){
-                System.out.print(tabB[i][j] + " | ");
+        System.out.print("   "); 
+        for (int j = 1; j < tabB[0].length - 1; j++){ 
+            System.out.print("| " + tabB[0][j] + " "); 
+        }
+        System.out.print("| 10");
+        System.out.println("|"); 
+        System.out.println("-------------------------------------------");
+
+        for (int i = 1; i < tabB.length ; i++){ 
+            if(i < 10) { 
+                System.out.print(tabB[i][0] + "  |"); 
+            } else {
+                System.out.print("10 |"); 
+            }
+            for (int j = 1 ; j < tabB[0].length; j++){ 
+                System.out.print(" " + tabB[i][j] + " |");
             }
             System.out.println();
-            System.out.println("------------------------------------------");
+            System.out.println("-------------------------------------------");
         }
     }
 }

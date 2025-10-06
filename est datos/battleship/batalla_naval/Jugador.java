@@ -35,110 +35,154 @@ public class Jugador {
 
 
     public void posionamiento_de_piezas(){
-        System.out.println("Es tiempo de colocar tus barcos!");
-        tab.imprimir_tabA();
+    System.out.println("Es tiempo de colocar tus barcos!");
+    tab.imprimir_tabA();
 
-        //colocar portaviones
-        System.out.println("El primer barco es un Portaviones. Mide 5 casillas");
-        char dir = obtener_dir();
-        int xcord = obtener_X();
-        int ycord = obtener_Y();
+    //colocar portaviones
+    System.out.println("El primer barco es un Portaviones. Mide 5 casillas");
+    char dir = obtener_dir();
+    int xcord = obtener_X();
+    int ycord = obtener_Y();
 
-        Coordenadas crd = new Coordenadas(xcord,ycord);
+    Coordenadas crd = new Coordenadas(xcord,ycord);
 
-        Ship portaviones = new Ship('P', dir, crd);
+    Ship portaviones = new Ship('P', dir, crd);
 
-        while(!tab.posicion_valida(crd, portaviones)){
-            System.out.println("Posicion invalida, por favor ingresa una posicion valida");
-            int nuevax = obtener_X();
-            int nuevay = obtener_Y();
-            crd = new Coordenadas(nuevax,nuevay);
-            portaviones = new Ship('P', dir, crd);
-        }
-
-        tab.colocar_barcos(crd, portaviones);
-        tab.imprimir_tabA();
-
-        //colocar Acorazado
-        System.out.println("El primer barco es un Acorazado. Mide 4 casillas");
-        dir = obtener_dir();
-        xcord = obtener_X();
-        ycord = obtener_Y();
-
-        crd = new Coordenadas(xcord,ycord);
-
-        Ship acorazado = new Ship('A', dir, crd);
-
-        while(tab.posicion_valida(crd, acorazado)){
-            System.out.println("Posicion invalida, por favor ingresa una posicion valida");
-            int nuevax = obtener_X();
-            int nuevay = obtener_Y();
-            crd = new Coordenadas(nuevax,nuevay);
-            acorazado = new Ship('A', dir, crd);
-        }
-        tab.colocar_barcos(crd, acorazado);
-        tab.imprimir_tabA();
-
-         //colocar crucero
-        System.out.println("El tercer barco es un Crucero. Mide 3 casillas");
-        dir = obtener_dir();
-        xcord = obtener_X();
-        ycord = obtener_Y();
-
-        crd = new Coordenadas(xcord,ycord);
-
-        Ship crucero = new Ship('C', dir, crd);
-
-        while(!tab.posicion_valida(crd, crucero)){
-            System.out.println("Posicion invalida, por favor ingresa una posicion valida");
-            int nuevax = obtener_X();
-            int nuevay = obtener_Y();
-            crd = new Coordenadas(nuevax,nuevay);
-            crucero = new Ship('C', dir, crd);
-        }
-        tab.colocar_barcos(crd, crucero);
-        tab.imprimir_tabA();
-        
-        //colocar submarino
-        System.out.println("El cuarto barco es un Submarino. Mide 3 casillas");
-        dir = obtener_dir();
-        xcord = obtener_X();
-        ycord = obtener_Y();
-
-        crd = new Coordenadas(xcord,ycord);
-
-        Ship submarino = new Ship('S', dir, crd);
-
-        while(!tab.posicion_valida(crd, submarino)){
-            System.out.println("Posicion invalida, por favor ingresa una posicion valida");
-            int nuevax = obtener_X();
-            int nuevay = obtener_Y();
-            crd = new Coordenadas(nuevax,nuevay);
-            crucero = new Ship('S', dir, crd);
-        }
-        tab.colocar_barcos(crd, submarino);
-        tab.imprimir_tabA();
-
-        //colocar destructor
-        System.out.println("El cuarto barco es un Destructor. Mide 2 casillas");
-        dir = obtener_dir();
-        xcord = obtener_X();
-        ycord = obtener_Y();
-
-        crd = new Coordenadas(xcord,ycord);
-
-        Ship destructor = new Ship('D', dir, crd);
-
-        while(!tab.posicion_valida(crd, destructor)){
-            System.out.println("Posicion invalida, por favor ingresa una posicion valida");
-            int nuevax = obtener_X();;
-            int nuevay = obtener_Y();;
-            crd = new Coordenadas(nuevax,nuevay);
-            crucero = new Ship('D', dir, crd);
-        }
-        tab.colocar_barcos(crd, destructor);
-        tab.imprimir_tabA();
+    while(!tab.posicion_valida(crd, portaviones)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        portaviones = new Ship('P', dir, crd);
     }
+
+    tab.colocar_barcos(crd, portaviones);
+    tab.imprimir_tabA();
+
+    //colocar Acorazado
+    System.out.println("El segundo barco es un Acorazado. Mide 4 casillas");
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship acorazado = new Ship('A', dir, crd);
+
+    // FIX: Condición invertida de while(valido) a while(!valido)
+    while(!tab.posicion_valida(crd, acorazado)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        acorazado = new Ship('A', dir, crd);
+    }
+    tab.colocar_barcos(crd, acorazado);
+    tab.imprimir_tabA();
+
+     //colocar crucero
+    System.out.println("El tercer barco es un Crucero. Mide 3 casillas");
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship crucero = new Ship('C', dir, crd);
+
+    while(!tab.posicion_valida(crd, crucero)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        crucero = new Ship('C', dir, crd);
+    }
+    tab.colocar_barcos(crd, crucero);
+    tab.imprimir_tabA();
+    
+    
+    //colocar segundo crucero
+    System.out.println("El cuarto barco es un SEGUNDO Crucero. Mide 3 casillas");
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship crucero2 = new Ship('C', dir, crd);
+
+    while(!tab.posicion_valida(crd, crucero2)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        crucero2 = new Ship('C', dir, crd);
+    }
+    tab.colocar_barcos(crd, crucero2);
+    tab.imprimir_tabA();
+    
+    //colocar Primer Submarino 
+    System.out.println("El quinto barco es un Submarino. Mide 3 casillas");
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship submarino = new Ship('S', dir, crd);
+
+    while(!tab.posicion_valida(crd, submarino)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        submarino = new Ship('S', dir, crd);
+    }
+    tab.colocar_barcos(crd, submarino);
+    tab.imprimir_tabA();
+    
+    // segundo submarino
+    System.out.println("El sexto barco es un SEGUNDO Submarino. Mide 3 casillas");
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship submarino2 = new Ship('S', dir, crd);
+
+    while(!tab.posicion_valida(crd, submarino2)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X();
+        int nuevay = obtener_Y();
+        crd = new Coordenadas(nuevax,nuevay);
+        submarino2 = new Ship('S', dir, crd);
+    }
+    tab.colocar_barcos(crd, submarino2);
+    tab.imprimir_tabA();
+
+
+    //colocar destructor
+    System.out.println("El ULTIMO barco es un Destructor. Mide 2 casillas"); 
+    dir = obtener_dir();
+    xcord = obtener_X();
+    ycord = obtener_Y();
+
+    crd = new Coordenadas(xcord,ycord);
+
+    Ship destructor = new Ship('D', dir, crd);
+
+    while(!tab.posicion_valida(crd, destructor)){
+        System.out.println("Posicion invalida, por favor ingresa una posicion valida");
+        int nuevax = obtener_X(); 
+        int nuevay = obtener_Y(); 
+        crd = new Coordenadas(nuevax,nuevay);
+        destructor = new Ship('D', dir, crd);
+    }
+    tab.colocar_barcos(crd, destructor);
+    tab.imprimir_tabA();
+
+}
 
     public Coordenadas ataque_del_jugador(){
         System.out.println("Ingresa la coordenada X donde quieres atacar al oponente: ");
@@ -163,17 +207,6 @@ public class Jugador {
 
     public void fuego_ataque_JB(Computadora comp, Coordenadas ataque){
         tab.imprimir_resul(tab.resultJBGF(ataque, comp));
-    }
-
-    public void imprimir_tab(char[][] tablero){
-         for (int i = 0; i < tablero.length ; i++){
-            System.out.print(i + "| ");
-            for (int j =0 ; j < tablero[0].length; j++){
-                System.out.print(tablero[i][j] + " | ");
-            }
-            System.out.println();
-            System.out.println("------------------------------------------");
-        }
     }
 
     
