@@ -14,45 +14,50 @@ public class Computadora {
     public void comp_armado(){
         char direccion = randomDireccion();
         Coordenadas crd = randomCoordenadas();
-        Ship portaviones = new Ship('P',crd,direccion);
-        while (tab.posicion_valida(crd, portaviones) == false) {
+        Ship portaviones = new Ship('P',direccion,crd);
+        while (!tab.posicion_valida(crd, portaviones)) {
             crd = randomCoordenadas();
+            portaviones = new Ship('P', direccion, crd);
         }
 
         tab.colocar_barcos(crd, portaviones);
 
         direccion = randomDireccion();
         crd = randomCoordenadas();
-        Ship acorazado = new Ship('A',crd,direccion);
-        while (tab.posicion_valida(crd, acorazado) == false) {
+        Ship acorazado = new Ship('A',direccion,crd);
+        while (!tab.posicion_valida(crd, acorazado)) {
             crd = randomCoordenadas();
+            acorazado = new Ship('A',direccion,crd);
         }
         
         tab.colocar_barcos(crd, acorazado);
     
         direccion = randomDireccion();
         crd = randomCoordenadas();
-        Ship crucero = new Ship('C',crd,direccion);
-        while (tab.posicion_valida(crd, crucero) == false) {
+        Ship crucero = new Ship('C',direccion,crd);
+        while (!tab.posicion_valida(crd, crucero)) {
             crd = randomCoordenadas();
+            crucero = new Ship('C',direccion,crd);
         }
 
         tab.colocar_barcos(crd, crucero);
 
         direccion = randomDireccion();
         crd = randomCoordenadas();
-        Ship submarino = new Ship('S',crd,direccion);
+        Ship submarino = new Ship('S',direccion,crd);
         while (tab.posicion_valida(crd, submarino) == false) {
             crd = randomCoordenadas();
+            submarino = new Ship('S',direccion,crd);
         }
 
         tab.colocar_barcos(crd, submarino);
 
         direccion = randomDireccion();
         crd = randomCoordenadas();
-        Ship destructor = new Ship('D',crd,direccion);
+        Ship destructor = new Ship('D',direccion,crd);
         while (tab.posicion_valida(crd, destructor) == false) {
             crd = randomCoordenadas();
+            destructor = new Ship('D',direccion,crd);
         }
 
         tab.colocar_barcos(crd, destructor);
@@ -82,19 +87,19 @@ public class Computadora {
 
             if(tab.resultJAGF(c, j) == 'H'){
                 obtenido = elegir_adyacente(c);
-                int rnd  = (int)(Math.randon() * obtenido.size() + 1); 
+                int rnd  = (int)(Math.random() * obtenido.size() + 1); 
 
-                while (!tab.valid_ataque(obtenido.get(rnd-1) || tab.inictabB()[obtenido.get(rnd - 1).obtener_Y() + 1][obtenido.get(rnd - 1).obtener_X() + 1] != ' ')) {
-                    rnd  = (int)(Math.randon() * obtenido.size() + 1); 
+                while (!tab.valid_ataque(obtenido.get(rnd)) || tab.obt_tabB()[obtenido.get(rnd).conseguir_Y()][obtenido.get(rnd).conseguir_X()] != ' ') {
+                    rnd  = (int)(Math.random() * obtenido.size() + 1); 
                 }
 
-                cord.add(obtenido.get(rnd - 1));
-                return obtenido.get(rnd - 1);
+                cord.add(obtenido.get(rnd));
+                return obtenido.get(rnd);
             }
         }
 
         c = randomCoordenadas();
-        while (!tab.valid_ataque(c) || tab.obt_tabB()[c.obtener_Y() + 1][c.obtener_X() + 1]) {
+        while (!tab.valid_ataque(c) || tab.obt_tabB()[c.conseguir_Y()][c.conseguir_X()] != ' ') {
             c = randomCoordenadas();          
         }
 
@@ -123,8 +128,8 @@ public class Computadora {
 
     public boolean buscar_ganadorC(Jugador j){
         for (int i = 1; i < j.obt_tabA().length; i++){
-            for (int j = 1; j < j.obt_tabA[0].length; i++){
-                if(j.obt_tabA[i][j] != ' ' || tab.obt_tabB()[i][j] != 'H'){
+            for (int k = 1; k < j.obt_tabA()[0].length; k++){
+                if(j.obt_tabA()[i][k] != ' ' || tab.obt_tabB()[i][k] != 'X'){
                     return false;
                 }
             }
@@ -147,8 +152,8 @@ public class Computadora {
     }
 
     public Coordenadas randomCoordenadas(){
-        int num1 = (int)(Math.random() * 10);
-        int num2 = (int)(Math.random() * 10);
+        int num1 = (int)(Math.random() * 9) + 1;
+        int num2 = (int)(Math.random() * 9) + 1;
 
         return new Coordenadas(num1,num2);
     }

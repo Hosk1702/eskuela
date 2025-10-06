@@ -122,8 +122,8 @@ public class Tablero {
     }
 
     public boolean valid_ataque(Coordenadas crd){
-        int xcord = crd.conseguir_X() + 1;
-        int ycord = crd.conseguir_Y() + 1;
+        int xcord = crd.conseguir_X();
+        int ycord = crd.conseguir_Y()   ;
 
         if(xcord < 1 || xcord >= tabA[0].length){
             return false;
@@ -137,8 +137,8 @@ public class Tablero {
     }
 
     public char resultJBGF(Coordenadas crd, Computadora oponente ){
-        int xcord = crd.conseguir_X() + 1;
-        int ycord = crd.conseguir_Y() + 1;
+        int xcord = crd.conseguir_X();
+        int ycord = crd.conseguir_Y();
 
         if(oponente.obt_tabA()[ycord][xcord] == 'P'){
             numPortavionesJB++;
@@ -171,12 +171,15 @@ public class Tablero {
             this.obt_tabB()[ycord][xcord] = 'H';
             oponente.obt_tabA()[ycord][xcord] = 'X';
             return 'H';
+        }else {
+            this.obt_tabB()[ycord][xcord] = 'M';
+            return 'M';
         }
     }
 
     public char resultJAGF(Coordenadas crd, Jugador oponente){
-        int xcord = crd.conseguir_X() + 1;
-        int ycord = crd.conseguir_Y() + 1;
+        int xcord = crd.conseguir_X();
+        int ycord = crd.conseguir_Y();
 
         if(oponente.obt_tabA()[ycord][xcord] == 'P'){
             numPortavionesJA++;
@@ -224,8 +227,8 @@ public class Tablero {
     }
 
     public void colocar_barcos(Coordenadas crd, Ship b){
-        int xcord = crd.conseguir_X() + 1;
-        int ycord = crd.conseguir_Y() + 1;
+        int xcord = crd.conseguir_X();
+        int ycord = crd.conseguir_Y();
 
         tabA[ycord][xcord] = b.obt_letra();
 
@@ -253,7 +256,7 @@ public class Tablero {
     }
     public char[][] obt_tabB(){
         return tabB;
-    }
+    }   
 
     public void imprimir_tabA(){
         for (int i = 0; i < tabA.length ; i++){
