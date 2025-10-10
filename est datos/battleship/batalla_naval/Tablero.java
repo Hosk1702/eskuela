@@ -149,15 +149,16 @@ public class Tablero {
                 System.out.println("Has hundido el acorazado de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
+            numCruceroJB++;
             if (numCruceroJB == 3){
-                System.out.println("Has hundido los cruceros de tu oponente!");
+                System.out.println("Has hundido uno de los cruceros de tu oponente!");
             }else if(numCruceroJB == 6){
                 System.out.println("Has hundido todos los cruceros de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJB++;
             if (numSubmarinoJB == 3){
-                System.out.println("Has hundido los submarinos de tu oponente!");
+                System.out.println("Has hundido uno de los submarinos de tu oponente!");
             }else if(numSubmarinoJB == 6){
                 System.out.println("Has hundido todos los submarinos de tu oponente!");
             }
@@ -193,15 +194,16 @@ public class Tablero {
                 System.out.println("Has hundido el acorazado de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'C'){
+            numCruceroJB++;
             if (numCruceroJB == 3){
-                System.out.println("Has hundido los cruceros de tu oponente!");
+                System.out.println("Has hundido uno de los cruceros de tu oponente!");
             }else if(numCruceroJB == 6){
                 System.out.println("Has hundido todos los cruceros de tu oponente!");
             }
         }else if(oponente.obt_tabA()[ycord][xcord] == 'S'){
             numSubmarinoJB++;
             if (numSubmarinoJB == 3){
-                System.out.println("Has hundido los submarinos de tu oponente!");
+                System.out.println("Has hundido uno de los submarinos de tu oponente!");
             }else if(numSubmarinoJB == 6){
                 System.out.println("Has hundido todos los submarinos de tu oponente!");
             }
