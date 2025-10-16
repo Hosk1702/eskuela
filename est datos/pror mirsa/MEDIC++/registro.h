@@ -16,17 +16,14 @@ struct Pacientes {
 };
 
 void registrar(vector<Pacientes>& lista){
-    do{
         Pacientes nuevo_paciente;
 
-        cout << "Ingrese el nombre del paciente: \n"
-        getline(cin, nuevo_paciente.nombre)
+        cout << "Ingrese el nombre del paciente: \n";
+        getline(cin, nuevo_paciente.nombre);
 
 
 
         lista.push_back(nuevo_paciente);
-
-    }
 
     }
 

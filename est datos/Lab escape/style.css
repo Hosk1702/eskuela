@@ -1,15 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
+    font: white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: black;
     margin: 0;
 }
 
-canvas {
-    border: 2px solid black;
-    background-color: white;
-}
