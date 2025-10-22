@@ -4,13 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape del Laberinto</title>
-    <link rel="stylesheet" href="style.css">
-    <script src = "phaser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            color: white; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+
+        /* Contenedor principal del juego */
+        #game-container {
+            padding: 0;
+            margin: 0;
+            width: 1180px; 
+            height: 980px;
+        }
+
+        /* --- Barra de UI Superior --- */
+        #ui-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 1180px; /* Ancho del juego */
+            padding: 5px 0;
+            box-sizing: border-box;
+        }
+
+        #inventory {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            /* Ajustamos el ancho para que no se mueva */
+            width: 120px; 
+        }
+
+        /* --- ESTILOS DEL ICONO DE LLAVE --- */
+        #key-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin-right: 8px;
+
+            /* --- TU RECUADRO AMARILLO --- */
+            background-color: #FFD700; /* Amarillo dorado */
+
+            /* Data URI para una llave pixel art */
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADtJREFUOI1jYBggwDjNxD+I/w/Fo4hMYDCCbNYyQcATDOYfIfqP5E8IFsYJRhxggBfJdPbQBAgwAGCiAm2H00bVAAAAAElFTkSuQmCC');
+            background-size: contain;
+            background-repeat: no-repeat;
+            image-rendering: pixelated; /* Mantiene el pixel art nítido */
+        }
+
+        /* --- NUEVOS ESTILOS DE PUNTUACIÓN --- */
+        #score-display {
+            font-size: 20px;
+            color: #FFD700; /* Color dorado */
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        #level-display {
+            font-size: 20px;
+            /* Ajustamos el ancho para que no se mueva */
+            width: 120px;
+            text-align: right;
+        }
+
+
+        /* --- Barra de UI Inferior (Vida) --- */
+        #ui-bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1180px;
+            margin-top: 15px;
+        }
+
+        #health-bar-bg {
+            width: 204px;
+            height: 24px;
+            background-color: #555;
+            border: 2px solid #888;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        #health-bar {
+            width: 100%; /* El JS controlará esto */
+            height: 100%;
+            background-color: #00ff00; /* Verde por defecto */
+            transition: width 0.2s linear, background-color 0.2s linear;
+        }
+
+        #health-text {
+            font-size: 16px;
+            margin-left: 10px;
+            /* Añadimos ancho fijo para que no "salte" */
+            width: 60px; 
+        }
+    </style>
+    <script src="phaser.min.js"></script>
 </head>
 <body>
     <h1>Escape del Laberinto</h1>
+
+    <div id="ui-top-bar">
+        <div id="inventory">
+            <span id="key-icon"></span>
+            <span id="key-text">x 0</span>
+        </div>
+        <div id="score-display">
+            Score: <span id="score-text">0</span>
+        </div>
+        <div id="level-display">
+            Nivel: <span id="level-text">1</span>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <div id="game"></div> </div>
+
+    <div id="ui-bottom-bar">
+        <div id="health-bar-bg">
+            <div id="health-bar"></div>
+        </div>
+        <span id="health-text">HP</span>
+    </div>
     
     <script src="script.js"></script>
-    <div id="game"></div>
 </body>
 </html>
