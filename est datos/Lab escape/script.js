@@ -177,13 +177,17 @@ class MazeScene extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
 
-    create() {
+create() {
         // --- Referencias a la UI de HTML ---
         this.healthBarEl = document.getElementById('health-bar');
         this.inventoryTextEl = document.getElementById('key-text');
         this.levelTextEl = document.getElementById('level-text');
         this.healthTextEl = document.getElementById('health-text'); 
         this.scoreTextEl = document.getElementById('score-text'); 
+
+        // --- CORRECCIÓN: Mostrar UI ---
+        document.getElementById('ui-top-bar').style.display = 'flex';
+        document.getElementById('ui-bottom-bar').style.display = 'flex';
 
         // --- Configuración del Laberinto ---
         const offsetX = (this.sys.game.config.width - this.mazeWidth) / 2;
@@ -580,7 +584,7 @@ class MazeScene extends Phaser.Scene {
     removeHeart(heart) { if (!heart) return; heart.sprite.destroy(); this.hearts.splice(this.hearts.indexOf(heart), 1); }
     removeTrap(trap) { if (!trap) return; trap.sprite.destroy(); this.traps.splice(this.traps.indexOf(trap), 1); }
 
-    // --- Lógica de Siguiente Nivel ---
+// --- Lógica de Siguiente Nivel ---
     nextLevel() {
         this.isMoving = true; // Bloquea el movimiento
         this.input.keyboard.off('keydown', this.handlePlayerMove, this);
@@ -589,7 +593,12 @@ class MazeScene extends Phaser.Scene {
         this.score += 500; // Bonus por pasar de nivel
         this.updateScoreText();
 
-        this.scene.stop('MazeScene');
+        // --- CORRECCIÓN: Ocultar la UI de HTML ---
+        document.getElementById('ui-top-bar').style.display = 'none';
+        document.getElementById('ui-bottom-bar').style.display = 'none';
+        
+        // --- CORRECCIÓN: Eliminado this.scene.stop('MazeScene') ---
+        // Phaser detiene la escena actual automáticamente al llamar a start.
         this.scene.start('LevelCompleteScene', {
             health: this.health,
             inventory: this.inventory,

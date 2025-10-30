@@ -1,30 +1,26 @@
-#ifndef REGISTRO_H_INCLUDED
-#define REGISTRO_H_INCLUDED
+#ifndef REGISTRO_H
+#define REGISTRO_H
+
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
 struct Pacientes {
     string nombre;
+    string sexo;
     int edad;
-    float estatura;
     float peso;
-    char genero;
-    string dianostico;
+    float est;
 };
 
-void registrar(vector<Pacientes>& lista){
-        Pacientes nuevo_paciente;
+// --- Declaraciones de Funciones (Prototipos) ---
+void registrar(vector<Pacientes> &lista);
+void buscar(const vector<Pacientes> &lista);
+void modificar(vector<Pacientes> &lista);
+void eliminar(vector<Pacientes> &lista);
+int encontrarPaciente(const vector<Pacientes> &lista, const string &nombre); // Función de ayuda
 
-        cout << "Ingrese el nombre del paciente: \n";
-        getline(cin, nuevo_paciente.nombre);
-
-
-
-        lista.push_back(nuevo_paciente);
-
-    }
-
-#endif // REGISTRO_H_INCLUDED
+#endif // REGISTRO_H
