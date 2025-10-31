@@ -1,0 +1,103 @@
+<div class="main-container">
+
+  <aside class="sidebar">
+    
+    <header class="header">
+      <h2>Estadísticas de Algoritmos</h2>
+      <p>Compara el rendimiento de diferentes algoritmos</p>
+    </header>
+
+    <div class="control-box">
+      <label>Nivel de Orden</label>
+      <div class="button-group">
+        <button 
+          [ngClass]="{'active': nivelOrden === 'Ordenado'}"
+          (click)="seleccionarNivel('Ordenado')">
+          Ordenado
+        </button>
+        <button 
+          [ngClass]="{'active': nivelOrden === 'Casi Ordenado'}"
+          (click)="seleccionarNivel('Casi Ordenado')">
+          Casi Ordenado
+        </button>
+        <button 
+          [ngClass]="{'active': nivelOrden === 'Aleatorio'}"
+          (click)="seleccionarNivel('Aleatorio')">
+          Aleatorio
+        </button>
+        <button 
+          [ngClass]="{'active': nivelOrden === 'Inverso'}"
+          (click)="seleccionarNivel('Inverso')">
+          Inverso
+        </button>
+      </div>
+    </div>
+
+    <div class="control-box">
+      <label>Cantidad de Elementos</label>
+      <div class="button-group">
+        <button 
+          [ngClass]="{'active': cantidadElementos === 100}"
+          (click)="seleccionarCantidad(100)">
+          100
+        </button>
+        <button 
+          [ngClass]="{'active': cantidadElementos === 500}"
+          (click)="seleccionarCantidad(500)">
+          500
+        </button>
+        <button 
+          [ngClass]="{'active': cantidadElementos === 1000}"
+          (click)="seleccionarCantidad(1000)">
+          1,000
+        </button>
+        <button 
+          [ngClass]="{'active': cantidadElementos === 5000}"
+          (click)="seleccionarCantidad(5000)">
+          5,000
+        </button>
+      </div>
+    </div>
+
+    <button class="execute-button" (click)="onExecuteAlgorithms()" [disabled]="ejecutando">
+      {{ ejecutando ? 'Calculando...' : 'Ejecutar Algoritmos' }}
+    </button>
+
+    <div class="ranking-box">
+      <label>🏆 Ranking</label>
+      <div class="ranking-result">
+        <span>1.</span>
+        <span>{{ ranking }}</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <main class="content">
+    
+    <h3>Resultados</h3>
+
+    <div class="chart-container">
+      <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="'bar'">
+      </canvas>
+    </div>
+
+    <div class="summary-box">
+      <div>
+        <span>Configuración</span>
+        <strong>{{ configuracionActual || 'Presiona "Ejecutar"' }}</strong>
+      </div>
+      <div>
+        <span>Algoritmo más rápido</span>
+        <strong>{{ ranking }}</strong>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<router-outlet />
