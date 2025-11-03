@@ -57,7 +57,7 @@ export class App {
     }
   };
 
-  // --- CAMBIO 2: Añadir el constructor para registrar la gráfica ---
+
   constructor() {
     Chart.register(...registerables);
   }
@@ -69,7 +69,7 @@ async onExecuteAlgorithms() {
     this.configuracionActual = `${this.nivelOrden} - ${this.cantidadElementos} elementos`;
     this.ranking = 'Calculando...';
 
-    // --- CAMBIO 3: Usar .bind(this) para no perder el contexto ---
+    
     const algorithms = [
       { name: 'Bubble Sort', fn: this.bubbleSort.bind(this) },
       { name: 'Insertion Sort', fn: this.insertionSort.bind(this) },
@@ -166,9 +166,7 @@ async onExecuteAlgorithms() {
     }
   }
 
-  // --- 6. ALGORITMOS (Sin cambios en su lógica) ---
 
-  // Lógica de Js/burbuja.js
   private bubbleSort(arr: number[]): number[] {
     let tam = arr.length;
     let swapped = true;
@@ -186,7 +184,7 @@ async onExecuteAlgorithms() {
     return arr;
   }
 
-  // Lógica de Js/Insercion_sort.js
+ 
   private insertionSort(arr: number[]): number[] {
     for(let i = 1 ; i < arr.length ; i++){
         let temp = arr[i];
@@ -200,7 +198,7 @@ async onExecuteAlgorithms() {
     return arr;
   }
 
-  // Lógica de Js/Selection_sort.js
+
   private selectionSort(arr: number[]): number[] {
     for(let i = 0 ; i < arr.length ; i++){
         let peque = i;
@@ -216,7 +214,7 @@ async onExecuteAlgorithms() {
     return arr;
   }
 
-  // Lógica de Js/quicksort.js
+
   private quickSort(arr: number[]): number[] {
     this.quicsort_internal(arr, 0, arr.length - 1);
     return arr;
@@ -246,7 +244,7 @@ async onExecuteAlgorithms() {
     }
   }
 
-  // Lógica de Js/mergesort.js
+ 
   private mergeSort(arr: number[]): number[] {
     this.mergesort_internal(arr, 0, arr.length - 1);
     return arr;
@@ -279,7 +277,7 @@ async onExecuteAlgorithms() {
     }
   }
 
-  // Lógica de Js/heapsort.js
+
   private heapSort(arr: number[]): number[] {
     this.heapsort_internal(arr);
     return arr;
@@ -306,7 +304,7 @@ async onExecuteAlgorithms() {
     }
   }
 
-  // Lógica de Js/Shellsort.js
+
   private shellSort(arr: number[]): number[] {
     let size = arr.length;
     let gapsize = Math.floor(size / 2);
