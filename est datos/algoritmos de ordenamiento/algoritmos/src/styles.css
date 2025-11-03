@@ -20,6 +20,7 @@ body {
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 * {
@@ -29,7 +30,7 @@ body {
 /* --- Layout Principal --- */
 .main-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   padding: 24px;
   gap: 24px;
 }
@@ -42,8 +43,7 @@ body {
   gap: 24px; /* Espacio uniforme entre cajas */
 }
 
-/* --- Estilo de Tarjeta (Cajas) --- */
-/* Aplicamos un estilo base a todas las cajas */
+
 .header,
 .control-box,
 .execute-button,
@@ -142,10 +142,14 @@ body {
   cursor: wait;
 }
 
-/* --- Caja de Ranking --- */
+
 .ranking-box {
   background-color: var(--ranking-bg);
   border: 1px solid var(--ranking-border);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 .ranking-box label {
   font-size: 0.9rem;
@@ -155,20 +159,56 @@ body {
   margin-bottom: 12px;
 }
 .ranking-result {
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  gap: 12px;
+  display: none;
 }
+
+.ranking-list {
+  list-style-type: decimal; /* 1., 2., 3. */
+  margin: 0;
+  padding-left: 24px; /* Espacio para los números */
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* Espacio entre cada ítem */
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.ranking-list li {
+  display: flex;
+  justify-content: space-between; /* Nombre a la izq, tiempo a la der */
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600; /* Texto en negrita como en la imagen */
+  color: var(--text-dark);
+}
+
+.ranking-list li::marker {
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.ranking-list li .time {
+  font-weight: 500;
+  color: var(--text-light); /* Color gris claro */
+  font-size: 0.9rem;
+}
+
+.ranking-empty {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: center;
+  padding: 10px 0;
+}
+
 .ranking-result span:first-child {
   font-size: 1.5rem;
 }
 .ranking-result-text {
-  color: var(--text-green); /* Color verde para el ganador */
+  color: var(--text-green); 
 }
 
-/* --- Contenido (Gráfica) --- */
+
 .chart-container {
   flex-grow: 1;
   position: relative;

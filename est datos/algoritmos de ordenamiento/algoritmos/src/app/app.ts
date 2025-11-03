@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { BaseChartDirective } from 'ng2-charts';
 
-// --- CAMBIO 1: Importar Chart y registerables ---
+
 import { ChartConfiguration, Chart, registerables } from 'chart.js'; 
 
 @Component({
@@ -19,14 +19,14 @@ import { ChartConfiguration, Chart, registerables } from 'chart.js';
 })
 export class App {
 
-  // 1. ESTADO DE LA UI
   nivelOrden: string = 'Aleatorio';
   cantidadElementos: number = 5000;
-  ranking: string = 'N/A';
+  fastest: string = 'N/A';
+  rankingList: { name: string, time: number }[] = [];
   configuracionActual: string = '';
   ejecutando: boolean = false;
 
-  // 2. DATOS DE LA GRÁFICA (Chart.js)
+  
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [
       'Bubble Sort', 
@@ -36,10 +36,16 @@ export class App {
       'Merge Sort',
       'Heap Sort',
       'Shell Sort',
-      'Bucket Sort'
+      'Bucket Sort',
+      'Radix Sort'
     ],
     datasets: [
-      { data: [], label: 'Tiempo (ms)', backgroundColor: 'rgba(90, 100, 255, 0.7)' }
+      { 
+        data: [], 
+        label: 'Tiempo (ms)', 
+        backgroundColor: 'rgba(90, 101, 255, 0.76)',
+        hoverBackgroundColor: 'rgba(90, 101, 255, 1)' 
+      }
     ]
   };
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
@@ -54,6 +60,16 @@ export class App {
           callback: (value) => `${value} ms` 
         }
       }
+    },
+    interaction: {
+      mode: 'index', 
+      intersect: false 
+    },
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        intersect: false
+      }
     }
   };
 
@@ -67,7 +83,8 @@ async onExecuteAlgorithms() {
     
     this.ejecutando = true;
     this.configuracionActual = `${this.nivelOrden} - ${this.cantidadElementos} elementos`;
-    this.ranking = 'Calculando...';
+    this.fastest = 'Calculando...';
+    this.rankingList = [];
 
     
     const algorithms = [
@@ -79,6 +96,7 @@ async onExecuteAlgorithms() {
       { name: 'Heap Sort', fn: this.heapSort.bind(this) },
       { name: 'Shell Sort', fn: this.shellSort.bind(this) },
       { name: 'Bucket Sort', fn: this.bucketSort.bind(this) },
+      { name: 'Radix Sort', fn: this.radixSort.bind(this) },
     ];
 
     const times = Array(algorithms.length).fill(0);
@@ -117,8 +135,9 @@ async onExecuteAlgorithms() {
       i++;
     }
 
-    const fastest = newResults.sort((a, b) => a.time - b.time)[0];
-    this.ranking = fastest.name;
+    const sortedResults = newResults.sort((a, b) => a.time - b.time);
+    this.rankingList = sortedResults;
+    this.fastest = sortedResults.length > 0 ? sortedResults[0].name : 'N/A';
     this.ejecutando = false;
   }
 
@@ -372,6 +391,43 @@ async onExecuteAlgorithms() {
       }
       bukt[k + 1] = val; 
   }
+}
+
+private countingSortForRadix(arr: number[], exp1: number) {
+    let n = arr.length;
+    let output = new Array(n).fill(0); 
+    let count = new Array(10).fill(0); 
+
+    for (let i = 0; i < n; i++) {
+        let index = Math.floor(arr[i] / exp1);
+        count[index % 10]++;
+    }
+
+    for (let i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    for (let i = n - 1; i >= 0; i--) {
+        let index = Math.floor(arr[i] / exp1);
+        output[count[index % 10] - 1] = arr[i];
+        count[index % 10]--;
+    }
+
+    for (let i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
+}
+
+private radixSort(arr: number[]): number[] {
+    if (arr.length === 0) return arr;
+
+    let max1 = Math.max(...arr);
+
+    for (let exp = 1; Math.floor(max1 / exp) > 0; exp *= 10) {
+        this.countingSortForRadix(arr, exp);
+    }
+    
+    return arr;
 }
 
 }

@@ -63,14 +63,24 @@
       {{ ejecutando ? 'Calculando...' : 'Ejecutar Algoritmos' }}
     </button>
 
-    <div class="ranking-box">
+   <div class="ranking-box">
       <label>🏆 Ranking</label>
-      <div class="ranking-result">
-        <span>1.</span>
-        <span>{{ ranking }}</span>
-      </div>
-    </div>
+      
+      <ol class="ranking-list" *ngIf="rankingList.length > 0">
+        <li *ngFor="let algo of rankingList">
+          <span>{{ algo.name }}</span>
+          <span class="time">{{ algo.time.toFixed(3) }} ms</span>
+        </li>
+      </ol>
 
+      <div *ngIf="rankingList.length === 0 && !ejecutando" class="ranking-empty">
+        Ejecuta para ver los resultados.
+      </div>
+      <div *ngIf="ejecutando" class="ranking-empty">
+        Calculando...
+      </div>
+
+    </div>
   </aside>
 
   <main class="content">
@@ -92,8 +102,8 @@
       </div>
       <div>
         <span>Algoritmo más rápido</span>
-        <strong>{{ ranking }}</strong>
-      </div>
+        <strong class="fastest-result">{{ fastest }}</strong>
+        </div>
     </div>
 
   </main>
