@@ -55,9 +55,16 @@ export class App {
     },
     scales: {
       y: {
-        beginAtZero: true,
+        type: 'logarithmic', // <--- Cambio principal aquí
         ticks: {
-          callback: (value) => `${value} ms` 
+          callback: (value) => {
+            // Formatear solo etiquetas de potencias de 10 para mayor claridad
+            const v = Number(value);
+            if (v === 100000 || v === 10000 || v === 1000 || v === 100 || v === 10 || v === 1 || v === 0.1 || v === 0.01 || v === 0.001) {
+              return `${v} ms`;
+            }
+            return null; // Ocultar otras etiquetas
+          } 
         }
       }
     },
@@ -116,7 +123,8 @@ async onExecuteAlgorithms() {
       }
       const t1 = performance.now();
       
-      const timeMs = t1 - t0;
+      // Asegurarse de que el tiempo no sea 0 (log(0) es indefinido)
+      const timeMs = (t1 - t0) + 0.001; // Añadimos un valor muy pequeño
       newResults.push({ name: algo.name, time: timeMs });
       
       times[i] = timeMs;
