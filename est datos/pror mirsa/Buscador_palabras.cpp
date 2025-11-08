@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm> 
 #include <cctype>    
+#include <regex>
+
 
 using namespace std;
 
@@ -20,6 +22,13 @@ vector<string> encontrarSubcadenas(const string& text, const vector<string>& wor
     return encontradas;
 }
 
+bool contiene_numero(const string& str) {
+
+    string num = regex_replace(str, regex(R"(\D)"), "");
+
+    return regex_search(num, regex("\\d{5}"));
+}
+
 int main() {
     vector<string> palabras_invalidas = {
         "whatsapp", "wa.me", "contáctame", "contactar", "contacto",
@@ -27,7 +36,7 @@ int main() {
         "punto com", ".com", "punto mx", ".mx", "punto edu", ".edu",
         "localizarme", "teléfono", "celular", "llámame", "llamar", "mi numero",
         "ig", "instagram", "facebook", "fb", "telegram", "trato por fuera",
-        "sesenta", "ochenta" 
+        "sesenta", "ochenta", "llamame", "mensaje privado", "mp", "seis", "siete", "ocho", "nueve", "cero", "uno", "dos",
     };
 
     string mensaje;
@@ -36,19 +45,24 @@ int main() {
 
     transform(mensaje.begin(), mensaje.end(), mensaje.begin(), ::tolower);
 
-    vector<string> violaciones = encontrarSubcadenas(mensaje, palabras_invalidas);
+    vector<string> palabras_proh = encontrarSubcadenas(mensaje, palabras_invalidas);
 
     cout << "\n--- Resultado de la Validación ---" << endl;
 
-    if (!violaciones.empty()) {
+    if (!palabras_proh.empty() ) {
         cout << "MENSAJE INVÁLIDO: Viola las políticas de comunicación." << endl;
         cout << "Indicios detectados:" << endl;
         
-        for (const string& palabra : violaciones) {
+        for (const string& palabra : palabras_proh) {
             cout << "- " << palabra << endl;
         }
-    } else {
-        cout << "Mensaje Válido." << endl;
+    }else if (contiene_numero(mensaje))
+    {
+        cout << "MENSAJE INVÁLIDO: Viola las políticas de comunicación." << endl;
+        cout << "Indicios detectados:" << endl << "- Contiene número de teléfono.";
+    } 
+    else {
+        cout << "Mensaje Valido." << endl;
     }
 
     return 0;
