@@ -5,11 +5,11 @@ using namespace std;
 struct nodo {
     int data;
     struct nodo *siguiente;
+    struct nodo *anterior;
 };
 
 struct nodo *head;
 struct nodo *tail;
-
 
 void begininsert();
 void lastinsert();
@@ -71,8 +71,8 @@ void begininsert() {
     puntero = (struct nodo *)malloc(sizeof(struct nodo *));
     if (puntero == NULL) {
         cout << "\nOVERFLOW";
-        return;
-    }
+    } 
+
     cout << "\nIngrese valor\n";
     cin >> item;
     puntero->data = item;
@@ -81,8 +81,11 @@ void begininsert() {
         head = puntero;
         tail = puntero;
         puntero->siguiente = head;
+        puntero->anterior = tail;
     } else {
         puntero->siguiente = head;
+        puntero->anterior = tail;
+        head->anterior = puntero;
         head = puntero;
         tail->siguiente = head;
     }
@@ -95,9 +98,8 @@ void lastinsert() {
     puntero = (struct nodo *)malloc(sizeof(struct nodo));
     if (puntero == NULL) {
         cout << "\nOVERFLOW";
-        return;
     } 
-    
+
     cout << "\nIngrese valor?\n";
     cin >> item;
     puntero->data = item;
@@ -105,8 +107,11 @@ void lastinsert() {
         head = puntero;
         tail = puntero;
         puntero->siguiente = head;
+        puntero->anterior = tail;
     } else {
         puntero->siguiente = head;
+        puntero->anterior = tail;
+        head->anterior = puntero;
         tail->siguiente = puntero;
         tail = puntero;
     }
@@ -121,12 +126,11 @@ void randominsert() {
         cout << "\nOVERFLOW";
         return;
     } 
-    
     if(head == NULL){
         begininsert();
         return;
     }
-   
+    
     cout << "\nIntroduzca el valor del elemento";
     cin >> item;
     puntero->data = item;
@@ -134,15 +138,18 @@ void randominsert() {
     cin >> loc;
     temp = head;
     for (i = 0; i < loc; i++) {
-        temp = temp->siguiente;
-        if (temp == head && i < loc -1) {
+
+        if (temp == head && i <loc-1) {
             cout << "\nNo se puede insertar\n";
             return;
         }
+        temp = temp->siguiente;
     }
     puntero->siguiente = temp->siguiente;
+    puntero->anterior = temp;
+    temp->siguiente->anterior = puntero;
     temp->siguiente = puntero;
-     if (temp == tail) {
+    if(temp == tail){
         tail = puntero;
     }
     cout << "\nNodo insertado";
@@ -159,11 +166,13 @@ void begin_delete() {
         tail = NULL;
         cout << "\nSolo se eliminó un nodo de la lista ...\n";
 
-    }
-    else {
+    } else {
         puntero = head;
         head = puntero->siguiente;
+        if(head != NULL){
+        head->anterior = tail;
         tail->siguiente = head;
+        }
         delete puntero;
         cout << "\nNodo eliminado desde el principio ...\n";
     }
@@ -174,18 +183,16 @@ void last_delete() {
     if (head == NULL) {
         cout << "\nLa lista está vacía";
     } else if (head->siguiente == tail) {
-        delete head;
+        puntero = head;
         head = NULL;
         tail = NULL;
+        delete puntero;
         cout << "\nSolo se eliminó un nodo de la lista ...\n";
     } else {
-        puntero = head;
-        while (puntero->siguiente != head) {
-            ptr1 = puntero;
-            puntero = puntero->siguiente;
-        }
-        ptr1->siguiente = head;
-        tail = ptr1;
+        puntero = tail;
+        tail = puntero->anterior;
+        tail->siguiente = head;
+        head->anterior = tail;
         delete puntero;
         cout << "\nNodo eliminado del último ...\n";
     }
@@ -197,6 +204,7 @@ void random_delete() {
     cout << "\nIntroduzca la ubicación del nodo después del cual desea realizar la eliminación.\n";
     cin >> loc;
     puntero = head;
+
     if(loc ==0 ){
         begin_delete();
         return;
@@ -204,7 +212,7 @@ void random_delete() {
 
     for (i = 0; i < loc; i++) {
         
-        if (puntero == head && i > 0) {
+        if (puntero == NULL) {
             cout << "\nNo se puede eliminar";
             return;
         }
@@ -213,8 +221,9 @@ void random_delete() {
         puntero = puntero->siguiente;
     }
     ptr1->siguiente = puntero->siguiente;
+    puntero->siguiente->anterior = ptr1;
     if(puntero->siguiente == head){
-        tail = ptr1;
+        tail= ptr1;
     }
     delete puntero;
     cout << "\nNodo eliminado " << loc ;
@@ -230,7 +239,7 @@ void search() {
     } else {
         cout << "\nIntroduce el elemento que deseas buscar?\n";
         cin >> item;
-        do{
+        while (puntero != NULL) {
             if (puntero->data == item) {
                 cout << "Elemento encontrado en la ubicación " << i + 1;
                 flag = 0;
@@ -240,7 +249,7 @@ void search() {
             }
             i++;
             puntero = puntero->siguiente;
-        }while (puntero != head);
+        }
         if (flag == 1) {
             cout << "Elemento no encontrado\n";
         }
@@ -254,9 +263,9 @@ void display() {
         cout << "Nada que imprimir";
     } else {
         cout << "\nimprimiendo valores . . . .\n";
-        do{
+        while (puntero != NULL) {
             cout << "\n" << puntero->data;
             puntero = puntero->siguiente;
-        }while (puntero != head);
+        }
     }
 }
