@@ -213,6 +213,11 @@ void random_delete() {
     for (i = 0; i < loc; i++) {
         
         if (puntero == NULL) {
+        cout << "\nNo se puede eliminar (lista vacía o loc inválida)";
+        return;
+        }
+
+        if (puntero == head && i > 0) {
             cout << "\nNo se puede eliminar";
             return;
         }
@@ -239,7 +244,7 @@ void search() {
     } else {
         cout << "\nIntroduce el elemento que deseas buscar?\n";
         cin >> item;
-        while (puntero != NULL) {
+        do{
             if (puntero->data == item) {
                 cout << "Elemento encontrado en la ubicación " << i + 1;
                 flag = 0;
@@ -249,7 +254,7 @@ void search() {
             }
             i++;
             puntero = puntero->siguiente;
-        }
+        }while (puntero != head);
         if (flag == 1) {
             cout << "Elemento no encontrado\n";
         }
@@ -263,9 +268,9 @@ void display() {
         cout << "Nada que imprimir";
     } else {
         cout << "\nimprimiendo valores . . . .\n";
-        while (puntero != NULL) {
+        do{
             cout << "\n" << puntero->data;
             puntero = puntero->siguiente;
-        }
+        }while (puntero != head);
     }
 }
