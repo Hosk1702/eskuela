@@ -1,11 +1,7 @@
 #ifndef REGISTRO_H
 #define REGISTRO_H
 
-#include <iostream>
 #include <string>
-#include <vector>
-#include <limits>
-
 using namespace std;
 
 struct Pacientes {
@@ -16,11 +12,10 @@ struct Pacientes {
     float est;
 };
 
-// --- Declaraciones de Funciones (Prototipos) ---
-void registrar(vector<Pacientes> &lista);
-void buscar(const vector<Pacientes> &lista);
-void modificar(vector<Pacientes> &lista);
-void eliminar(vector<Pacientes> &lista);
-int encontrarPaciente(const vector<Pacientes> &lista, const string &nombre); // Función de ayuda
+void inicializarEntorno();
+void registrar();
+void buscar();
+void modificar();
+void eliminar();
 
 #endif // REGISTRO_H

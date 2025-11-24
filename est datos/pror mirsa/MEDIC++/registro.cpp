@@ -1,222 +1,206 @@
 #include "registro.h"
 #include <iostream>
-#include <string>
-#include <vector>
-#include <limits>
-
+#include <fstream>
+#include <sstream>
+#include <vector>    
+#include <cstdlib>   
 
 using namespace std;
 
-/**
- * Pide los datos de un nuevo paciente y lo añade al vector.
- */
-void registrar(vector<Pacientes> &lista) {
-    Pacientes nuevoPaciente;
+const string ARCHIVO = "./registros/pacientes.txt";
 
-    cout << "\n== 1. Ingresar Nuevo Paciente ==\n";
 
-    // Limpia el buffer de cin antes de usar getline
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    cout << "Nombre: ";
-    getline(cin, nuevoPaciente.nombre);
-
-    cout << "Sexo: ";
-    cin >> nuevoPaciente.sexo;
-
-    cout << "Edad: ";
-    while (!(cin >> nuevoPaciente.edad) || nuevoPaciente.edad <= 0) {
-        cout << "Entrada invalida. Introduce un numero valido para la edad: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    cout << "Peso: ";
-    while (!(cin >> nuevoPaciente.peso) || nuevoPaciente.peso <= 0) {
-        cout << "Entrada invalida. Introduce un numero valido para la edad: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    cout << "Estatura: ";
-    while (!(cin >> nuevoPaciente.est) || nuevoPaciente.est <= 0) {
-        cout << "Entrada invalida. Introduce un numero valido para la edad: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    lista.push_back(nuevoPaciente);
-    cout << "\n¡Paciente " << nuevoPaciente.nombre << " registrado con exito!\n";
+void inicializarEntorno() {
+    system("mkdir registros"); 
 }
 
-/**
- * Busca un paciente por nombre y muestra sus datos.
- */
-void buscar(const vector<Pacientes> &lista) {
-    if (lista.empty()) {
-        cout << "\nNo hay pacientes registrados.\n";
+Pacientes lineaAPaciente(string linea) {
+    Pacientes p;
+    stringstream ss(linea);
+    string segmento;
+
+    getline(ss, p.nombre, '|');
+    getline(ss, p.sexo, '|');
+    
+    getline(ss, segmento, '|');
+    p.edad = segmento.empty() ? 0 : stoi(segmento);
+    
+    getline(ss, segmento, '|');
+    p.peso = segmento.empty() ? 0 : stof(segmento);
+    
+    getline(ss, segmento, '|');
+    p.est = segmento.empty() ? 0 : stof(segmento);
+
+    return p;
+}
+
+// Carga todo el archivo a memoria RAM para poder editarlo
+vector<Pacientes> cargarDatosEnMemoria() {
+    vector<Pacientes> lista;
+    ifstream archivo(ARCHIVO.c_str());
+    if (!archivo.is_open()) return lista;
+
+    string linea;
+    while (getline(archivo, linea)) {
+        if (!linea.empty()) {
+            lista.push_back(lineaAPaciente(linea));
+        }
+    }
+    archivo.close();
+    return lista;
+}
+
+// Sobrescribe el archivo original con la lista actualizada
+void guardarDatosEnArchivo(const vector<Pacientes>& lista) {
+    // ios::trunc BORRA el contenido del archivo para escribir lo nuevo
+    ofstream archivo(ARCHIVO.c_str(), ios::trunc); 
+    if (archivo.is_open()) {
+        for (size_t i = 0; i < lista.size(); i++) {
+            archivo << lista[i].nombre << "|" 
+                    << lista[i].sexo << "|" 
+                    << lista[i].edad << "|" 
+                    << lista[i].peso << "|" 
+                    << lista[i].est << "\n";
+        }
+        archivo.close();
+    }
+}
+
+// --- Funciones Principales ---
+
+void registrar() {
+    Pacientes p;
+    cout << "\n== INGRESAR PACIENTE ==\n";
+    cin.ignore(); 
+
+    cout << "Nombre: "; getline(cin, p.nombre);
+    cout << "Sexo: "; cin >> p.sexo;
+    cout << "Edad: "; cin >> p.edad;
+    cout << "Peso: "; cin >> p.peso;
+    cout << "Estatura: "; cin >> p.est;
+
+    // Para registrar solo aÃ±adimos al final (ios::app), no hace falta reescribir todo
+    ofstream archivo(ARCHIVO.c_str(), ios::app);
+    if (archivo.is_open()) {
+        archivo << p.nombre << "|" << p.sexo << "|" << p.edad << "|" 
+                << p.peso << "|" << p.est << "\n";
+        archivo.close();
+        cout << "Paciente registrado con exito.\n";
+    } else {
+        cout << "Error: No se pudo abrir el archivo.\n";
+    }
+}
+
+void buscar() {
+    // Para buscar no necesitamos cargar todo, leemos linea por linea (mÃ¡s eficiente)
+    ifstream archivo(ARCHIVO.c_str());
+    if (!archivo.is_open()) {
+        cout << "No hay registros.\n";
         return;
     }
 
-    cout << "\n== 2. Buscar Paciente ==\n";
-    cout << "Ingresa el nombre completo del paciente a buscar: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    string nombreBusqueda;
-    getline(cin, nombreBusqueda);
+    cin.ignore();
+    string buscado;
+    cout << "\nNombre a buscar: "; getline(cin, buscado);
 
-    int indice = encontrarPaciente(lista, nombreBusqueda);
-
-    if (indice != -1) {
-        const Pacientes &paciente = lista[indice]; // Usamos const & para no copiar
-        cout << "\n--- Paciente Encontrado ---\n";
-        cout << "Nombre: " << paciente.nombre << "\n";
-        cout << "Sexo: " << paciente.sexo << "\n";
-        cout << "Edad: " << paciente.edad << "\n";
-        cout << "Peso: " << paciente.peso << "\n";
-        cout << "Estatura: " << paciente.est << "\n";
-        cout << "---------------------------\n";
-    } else {
-        cout << "\nNo se encontro ningun paciente con el nombre: " << nombreBusqueda << "\n";
+    string linea;
+    bool encontrado = false;
+    while (getline(archivo, linea)) {
+        if (linea.empty()) continue;
+        Pacientes p = lineaAPaciente(linea);
+        
+        if (p.nombre == buscado) {
+            cout << "\n--- Encontrado ---\n";
+            cout << "Nombre: " << p.nombre << "\nSexo: " << p.sexo 
+                 << "\nEdad: " << p.edad << "\nPeso: " << p.peso 
+                 << "\nEstatura: " << p.est << "\n------------------\n";
+            encontrado = true;
+        }
     }
+    archivo.close();
+    if (!encontrado) cout << "No se encontro a " << buscado << endl;
 }
 
-/**
- * Busca un paciente por nombre y permite modificar sus datos.
- */
-void modificar(vector<Pacientes> &lista) {
-    if (lista.empty()) {
-        cout << "\nNo hay pacientes para modificar.\n";
+void modificar() {
+    // 1. Cargamos todo a memoria
+    vector<Pacientes> todos = cargarDatosEnMemoria();
+    if (todos.empty()) {
+        cout << "No hay registros para modificar.\n";
         return;
     }
 
-    cout << "\n== 3. Modificar Paciente ==\n";
-    cout << "Ingresa el nombre completo del paciente a modificar: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    string nombreBusqueda;
-    getline(cin, nombreBusqueda);
+    cin.ignore();
+    string buscado;
+    cout << "\nNombre a modificar: "; getline(cin, buscado);
 
-    int indice = encontrarPaciente(lista, nombreBusqueda);
+    bool encontrado = false;
 
-    if (indice != -1) {
-        Pacientes &paciente = lista[indice]; // Referencia para modificar
+    // 2. Modificamos en memoria
+    for (size_t i = 0; i < todos.size(); i++) {
+        if (todos[i].nombre == buscado) {
+            encontrado = true;
+            cout << "Paciente encontrado. Ingrese nuevos datos:\n";
+            
+            cout << "Nuevo Nombre (" << todos[i].nombre << "): "; 
+            getline(cin, todos[i].nombre);
+            
+            cout << "Nuevo Sexo (" << todos[i].sexo << "): "; 
+            cin >> todos[i].sexo;
+            
+            cout << "Nueva Edad (" << todos[i].edad << "): "; 
+            cin >> todos[i].edad;
+            
+            cout << "Nuevo Peso (" << todos[i].peso << "): "; 
+            cin >> todos[i].peso;
+            
+            cout << "Nueva Estatura (" << todos[i].est << "): "; 
+            cin >> todos[i].est;
+            cin.ignore(); 
 
-        cout << "Paciente encontrado (" << paciente.nombre << "). Ingresa los nuevos datos (deja en blanco para no cambiar):\n";
-
-        string nuevoNombre;
-        cout << "Nuevo Nombre: ";
-        getline(cin, nuevoNombre);
-        if (!nuevoNombre.empty()) {
-            paciente.nombre = nuevoNombre;
+            cout << "Â¡Datos modificados en memoria!\n";
+            break; // Salimos del ciclo, ya encontramos al paciente
         }
+    }
 
-        string nuevoSexo;
-        cout << "Nuevo Sexo: ";
-        getline(cin, nuevoSexo);
-        if (!nuevoSexo.empty()) {
-            paciente.sexo = nuevoSexo;
-        }
-
-        string nuevaEdadStr;
-        int nuevaEdad;
-        cout << "Nueva Edad: ";
-        getline(cin, nuevaEdadStr);
-        if (!nuevaEdadStr.empty()) {
-            // Validamos que la nueva edad sea un número
-            try {
-                nuevaEdad = stoi(nuevaEdadStr); // stoi = string to integer
-                if (nuevaEdad > 0) {
-                    paciente.edad = nuevaEdad;
-                } else {
-                    cout << "La edad debe ser un numero positivo. Edad no actualizada.\n";
-                }
-            } catch (...) {
-                cout << "Entrada invalida. Edad no actualizada.\n";
-            }
-        }
-
-        string nuevoPesoStr;
-        int nuevoPeso;
-        cout << "Nuevo Peso: ";
-        getline(cin, nuevoPesoStr);
-        if (!nuevoPesoStr.empty()) {
-            // Validamos que el nuevo peso sea un número
-            try {
-                nuevoPeso = stoi(nuevoPesoStr); // stoi = string to integer
-                if (nuevoPeso > 0) {
-                    paciente.peso = nuevoPeso;
-                } else {
-                    cout << "El Peso debe ser un numero positivo. Peso no actualizado.\n";
-                }
-            } catch (...) {
-                cout << "Entrada invalida. Peso no actualizado.\n";
-            }
-        }
-
-        string nuevaEstStr;
-        int nuevaEst;
-        cout << "Nueva Estatura: ";
-        getline(cin, nuevaEstStr);
-        if (!nuevaEstStr.empty()) {
-            // Validamos que la nueva estatura sea un número
-            try {
-                nuevaEst = stoi(nuevaEstStr); // stoi = string to integer
-                if (nuevaEst > 0) {
-                    paciente.est = nuevaEst;
-                } else {
-                    cout << "La estatura debe ser un numero positivo. Estatura no actualizada.\n";
-                }
-            } catch (...) {
-                cout << "Entrada invalida. Estatura no actualizada.\n";
-            }
-        }
-
-        cout << "\n¡Datos actualizados para " << paciente.nombre << "!\n";
-
+    // 3. Si hubo cambios, sobrescribimos el archivo original
+    if (encontrado) {
+        guardarDatosEnArchivo(todos);
+        cout << "Archivo actualizado correctamente.\n";
     } else {
-        cout << "\nNo se encontro ningun paciente con el nombre: " << nombreBusqueda << "\n";
+        cout << "No se encontro el paciente.\n";
     }
 }
 
-/**
- * Busca un paciente por nombre y lo elimina del vector.
- */
-void eliminar(vector<Pacientes> &lista) {
-    if (lista.empty()) {
-        cout << "\nNo hay pacientes para eliminar.\n";
+void eliminar() {
+    // 1. Cargamos todo a memoria
+    vector<Pacientes> todos = cargarDatosEnMemoria();
+    if (todos.empty()) {
+        cout << "No hay registros para eliminar.\n";
         return;
     }
 
-    cout << "\n== 4. Eliminar Paciente ==\n";
-    cout << "Ingresa el nombre completo del paciente a eliminar: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    string nombreBusqueda;
-    getline(cin, nombreBusqueda);
+    cin.ignore();
+    string buscado;
+    cout << "\nNombre a eliminar: "; getline(cin, buscado);
 
-    int indice = encontrarPaciente(lista, nombreBusqueda);
-
-    if (indice != -1) {
-        string nombreEliminado = lista[indice].nombre;
-        // .erase necesita un "iterador", .begin() + indice nos da eso.
-        lista.erase(lista.begin() + indice);
-        cout << "\n¡Paciente " << nombreEliminado << " eliminado con exito!\n";
-    } else {
-        cout << "\nNo se encontro ningun paciente con el nombre: " << nombreBusqueda << "\n";
-    }
-}
-
-
-/**
- * Función de ayuda para buscar un paciente.
- * Devuelve el índice (posición) del paciente en el vector.
- * Devuelve -1 si no se encuentra.
- */
-int encontrarPaciente(const vector<Pacientes> &lista, const string &nombre) {
-    for (size_t i = 0; i < lista.size(); ++i) {
-        // Comparamos ignorando mayúsculas/minúsculas (opcional, pero útil)
-        // Para hacerlo simple, aquí comparamos directo:
-        if (lista[i].nombre == nombre) {
-            return i; // Devuelve el índice
+    bool encontrado = false;
+    
+    // 2. Busamos y eliminamos de la memoria
+    for (size_t i = 0; i < todos.size(); i++) {
+        if (todos[i].nombre == buscado) {
+            // .erase elimina el elemento del vector
+            todos.erase(todos.begin() + i);
+            encontrado = true;
+            cout << "Paciente eliminado de la memoria.\n";
+            break; 
         }
     }
-    return -1; // No encontrado
+
+    // 3. Sobrescribimos el archivo con los que quedaron
+    if (encontrado) {
+        guardarDatosEnArchivo(todos);
+        cout << "Archivo actualizado (registro borrado).\n";
+    } else {
+        cout << "No se encontro el paciente.\n";
+    }
 }
