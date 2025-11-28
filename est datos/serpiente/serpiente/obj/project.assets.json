@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\serpiente.csproj",
+      "projectUniqueName": "C:\\Users\\nadaq\\Documents\\GitHub\\eskuela\\est datos\\serpiente\\serpiente\\serpiente.csproj",
       "projectName": "serpiente",
-      "projectPath": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\serpiente.csproj",
+      "projectPath": "C:\\Users\\nadaq\\Documents\\GitHub\\eskuela\\est datos\\serpiente\\serpiente\\serpiente.csproj",
       "packagesPath": "C:\\Users\\nadaq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\obj\\",
+      "outputPath": "C:\\Users\\nadaq\\Documents\\GitHub\\eskuela\\est datos\\serpiente\\serpiente\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
