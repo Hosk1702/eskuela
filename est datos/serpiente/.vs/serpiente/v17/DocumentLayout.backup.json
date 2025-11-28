@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\nadaq\\source\\repos\\serpiente\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|c:\\users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|c:\\users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|c:\\users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|c:\\users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{5F75BD52-023A-4D0E-96B8-20626A6A6C73}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|c:\\users\\nadaq\\source\\repos\\serpiente\\serpiente\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{101754CC-AFC1-46BE-9FC8-A3C3B569A4A7}|serpiente\\serpiente.csproj|solutionrelative:serpiente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +26,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Program.cs",
+              "RelativeDocumentMoniker": "serpiente\\Program.cs",
+              "ToolTip": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Program.cs",
+              "RelativeToolTip": "serpiente\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T17:15:03.434Z"
             },
             {
               "$type": "Document",
@@ -36,9 +52,9 @@
               "RelativeDocumentMoniker": "serpiente\\Form1.Designer.cs",
               "ToolTip": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Form1.Designer.cs",
               "RelativeToolTip": "serpiente\\Form1.Designer.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAcwKIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAIwK0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T18:18:23.46Z"
+              "WhenOpened": "2025-11-28T17:12:32.902Z"
             },
             {
               "$type": "Document",
@@ -48,21 +64,21 @@
               "RelativeDocumentMoniker": "serpiente\\Form1.cs",
               "ToolTip": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Form1.cs",
               "RelativeToolTip": "serpiente\\Form1.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALcBAAAAAAAAAAAIwNMBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T17:16:26.257Z",
+              "WhenOpened": "2025-11-28T17:12:24.109Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Form1.cs",
               "RelativeDocumentMoniker": "serpiente\\Form1.cs",
               "ToolTip": "C:\\Users\\nadaq\\source\\repos\\serpiente\\serpiente\\Form1.cs [Dise\u00F1o]",
               "RelativeToolTip": "serpiente\\Form1.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T17:07:11.702Z"
+              "WhenOpened": "2025-11-28T17:12:11.006Z"
             }
           ]
         }
