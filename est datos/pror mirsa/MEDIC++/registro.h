@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+// Estructura original
 struct Pacientes {
     string nombre;
     string sexo;
@@ -12,10 +13,25 @@ struct Pacientes {
     float est;
 };
 
+// Nueva estructura para Médicos
+struct Medicos {
+    string nombre;
+    string especialidad;
+    string telefono;
+};
+
+// Nueva estructura para Empleados
+struct Empleados {
+    string nombre;
+    string cargo;
+    float salario;
+};
+
 void inicializarEntorno();
-void registrar();
-void buscar();
-void modificar();
-void eliminar();
+
+// Menús principales para cada categoría
+void menuPacientes();
+void menuMedicos();
+void menuEmpleados();
 
 #endif // REGISTRO_H

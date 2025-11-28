@@ -1,17 +1,18 @@
 # depslib dependency file v1.0
-1763768782 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\main.cpp
+1764138844 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\main.cpp
 	<iostream>
 	<limits>
 	"registro.h"
 
-1763768773 c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\registro.h
+1764138931 c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\registro.h
 	<string>
 
-1763768742 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\registro.cpp
+1764138938 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\medic++\registro.cpp
 	"registro.h"
 	<iostream>
 	<fstream>
 	<sstream>
 	<vector>
 	<cstdlib>
+	<limits>
 

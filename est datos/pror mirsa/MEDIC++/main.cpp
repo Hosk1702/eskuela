@@ -5,34 +5,38 @@
 using namespace std;
 
 int main() {
-    // Prepara la carpeta
+    // Crea la carpeta 'registros' si no existe
     inicializarEntorno();
 
-    bool valid = true;
+    bool salir = false;
     int opcion;
 
-    cout << "\t"<<"==========================\n";
-    cout << "\t"<< "  BIENVENIDO A MEDIC++ >>\n";
-    cout << "\t" << "==========================\n";
-
     do {
-        cout << "\n1. Registrar\n2. Buscar\n3. Modificar\n4. Eliminar\n5. Salir\nOpcion: ";
-        
-        // Validación básica de entrada
-        while (!(cin >> opcion) || opcion < 1 || opcion > 5) {
+        cout << "\t" << "===============================\n";
+        cout << "\t" << "   SISTEMA INTEGRAL MEDIC++    \n";
+        cout << "\t" << "===============================\n";
+        cout << "\nSeleccione una opcion:\n";
+        cout << "1. Gestionar Pacientes\n";
+        cout << "2. Gestionar Medicos\n";
+        cout << "3. Gestionar Empleados\n";
+        cout << "4. Salir\n";
+        cout << "Opcion: ";
+
+        while (!(cin >> opcion) || opcion < 1 || opcion > 4) {
             cout << "Opcion invalida. Intente de nuevo: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
         switch (opcion) {
-            case 1: registrar(); break;
-            case 2: buscar(); break;
-            case 3: modificar(); break;
-            case 4: eliminar(); break;
-            case 5: valid = false; break;
+            case 1: menuPacientes(); break;
+            case 2: menuMedicos(); break;
+            case 3: menuEmpleados(); break;
+            case 4: salir = true; break;
         }
-    } while (valid);
 
+    } while (!salir);
+
+    cout << "Saliendo del sistema...\n";
     return 0;
 }
