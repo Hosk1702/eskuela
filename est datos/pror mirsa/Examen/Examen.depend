@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1764809165 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\examen\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<cstdlib>
+	<limits>
+

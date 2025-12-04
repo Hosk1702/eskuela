@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("serpiente")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be2637ba03d67aa581e5f223ae542f93b20604eb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0734e5434327ca39d0590646afddb0b2cb98b49c")]
 [assembly: System.Reflection.AssemblyProductAttribute("serpiente")]
 [assembly: System.Reflection.AssemblyTitleAttribute("serpiente")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
