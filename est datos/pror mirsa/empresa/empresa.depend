@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1764898902 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\empresa\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<cstdlib>
+	<limits>
+	<string>
+

@@ -1,0 +1,3 @@
+uadeo|kk|10|1000|mexico
+UAIM|INDIGENA|10|800|chiapas
+fong|autista|1|2006|mexico
