@@ -1,0 +1,3 @@
+sabritas|1|22
+empanada|23|460
+empanada|47|940

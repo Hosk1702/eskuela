@@ -1,0 +1,4 @@
+sabritas|22|22
+cheetos|18|20
+frijoles puerquitos|27|10
+popotes|1|100

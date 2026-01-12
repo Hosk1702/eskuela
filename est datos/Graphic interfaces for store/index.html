@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fim Eats - Interfaces UI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        /* Marco del Celular */
+        .phone-frame {
+            width: 320px;
+            height: 640px;
+            background-color: #fff;
+            border: 12px solid #333;
+            border-radius: 30px;
+            overflow: hidden; /* Oculta el scroll */
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabecera de la App */
+        .app-header {
+            background-color: #004a98; /* Azul UAS aprox */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-bar {
+            background-color: #333;
+            color: white;
+            font-size: 10px;
+            padding: 2px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .screen-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        /* Estilos Generales */
+        h2 { font-size: 18px; margin-top: 0; color: #333; }
+        h3 { font-size: 16px; margin: 10px 0 5px; color: #004a98; }
+        p { font-size: 12px; color: #666; margin-bottom: 10px; }
+        label { display: block; font-size: 12px; margin-top: 10px; font-weight: bold; color: #444; }
+        
+        input, select, textarea {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #004a98;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button.secondary {
+            background-color: #e0e0e0;
+            color: #333;
+            margin-top: 5px;
+        }
+        
+        button.danger {
+            background-color: #d9534f;
+            margin-top: 5px;
+        }
+
+        .link {
+            color: #004a98;
+            text-decoration: underline;
+            font-size: 11px;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Elementos específicos */
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .product-img {
+            width: 50px;
+            height: 50px;
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+        .price { color: #28a745; font-weight: bold; }
+        
+        .bottom-nav {
+            background: white;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .nav-item { font-size: 20px; color: #999; }
+        .nav-item.active { color: #004a98; }
+
+        .tag-agotado { background: #d9534f; color: white; padding: 2px 5px; font-size: 9px; border-radius: 3px; }
+        
+        .screen-title {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            background: #e0e0e0;
+            padding: 2px 0;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="screen-title">1. Login</div>
+        <div class="status-bar"><span>12:00</span><span>100%</span></div>
+        <div class="screen-content" style="display:flex; flex-direction:column; justify-content:center;">
+            <div style="text-align:center; margin-bottom:30px;">
+                <div style="font-size:40px; color:#004a98; font-weight:bold;">Fim eats</div>
+                <p>Tu comida sin filas</p>
+            </div>
+            
+            <label>Correo o NIP</label>
+            <input type="text" placeholder="10203040">
+            
+            <label>Contraseña</label>
+            <input type="password" placeholder="********">
+            
+            <div class="link">¿Olvidaste tu contraseña? (CU-3)</div>
+            
+            <button>INGRESAR</button>
+            <button class="secondary">CREAR CUENTA (CU-1)</button>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">2. Registro</div>
+        <div class="status-bar"><span>12:01</span><span>99%</span></div>
+        <div class="app-header">Registro</div>
+        <div class="screen-content">
+            <div style="text-align:center; margin:10px;">
+                <div style="width:80px; height:80px; background:#ddd; border-radius:50%; margin:auto; display:flex; align-items:center; justify-content:center; color:#666;">Foto</div>
+            </div>
+            
+            <label>Nombre Completo</label>
+            <input type="text">
+            
+            <label>Cuenta Institucional (NIP)</label>
+            <input type="number">
+            
+            <label>Correo Electrónico</label>
+            <input type="email">
+            
+            <label>Teléfono (Opcional)</label>
+            <input type="tel">
+            
+            <label>Contraseña</label>
+            <input type="password">
+            
+            <button>REGISTRARME</button>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">3. Catálogo Home</div>
+        <div class="status-bar"><span>12:05</span><span>95%</span></div>
+        <div class="app-header">
+            <span>Hola, Carlos</span>
+            <span>🛒</span>
+        </div>
+        <div class="screen-content">
+            <input type="text" placeholder="🔍 Buscar producto... (CU-7)" style="width:95%; margin-bottom:15px;">
+            
+            <div style="display:flex; gap:5px; overflow-x:auto; margin-bottom:15px; padding-bottom:5px;">
+                <button style="padding:5px 10px; font-size:11px; margin:0; width:auto;">Todos</button>
+                <button class="secondary" style="padding:5px 10px; font-size:11px; margin:0; width:auto;">Platillos</button>
+                <button class="secondary" style="padding:5px 10px; font-size:11px; margin:0; width:auto;">Bebidas</button>
+            </div>
+
+            <h3>Populares</h3>
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Burrito de Machaca</div>
+                    <div style="font-size:10px; color:#666;">Prep: 10 min</div>
+                    <div class="price">$45.00</div>
+                </div>
+                <button style="width:30px; height:30px; padding:0; margin:0;">+</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Torta de Cochinita</div>
+                    <div class="tag-agotado">AGOTADO</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Coca Cola 600ml</div>
+                    <div class="price">$22.00</div>
+                </div>
+                <button style="width:30px; height:30px; padding:0; margin:0;">+</button>
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item active">🏠</div>
+            <div class="nav-item">📋</div>
+            <div class="nav-item">👤</div>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">4. Carrito de Compras</div>
+        <div class="status-bar"><span>12:10</span><span>90%</span></div>
+        <div class="app-header">Mi Carrito</div>
+        <div class="screen-content">
+            
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Burrito de Machaca</div>
+                    <div class="price">$45.00</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <button class="secondary" style="width:25px; height:25px; padding:0; margin:0;">-</button>
+                    <span>2</span>
+                    <button class="secondary" style="width:25px; height:25px; padding:0; margin:0;">+</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Coca Cola 600ml</div>
+                    <div class="price">$22.00</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <button class="secondary" style="width:25px; height:25px; padding:0; margin:0;">-</button>
+                    <span>1</span>
+                    <button class="secondary" style="width:25px; height:25px; padding:0; margin:0;">+</button>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; border-top:1px solid #ccc; padding-top:10px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:16px;">
+                    <span>Total Global:</span>
+                    <span>$112.00</span>
+                </div>
+            </div>
+
+            <button>PAGAR (CHECKOUT)</button>
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">📋</div>
+            <div class="nav-item active">🛒</div>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">5. Método de Pago</div>
+        <div class="status-bar"><span>12:12</span><span>88%</span></div>
+        <div class="app-header">Finalizar Compra</div>
+        <div class="screen-content">
+            <h3>Total a Pagar: $112.00</h3>
+            
+            <label>Selecciona método de pago:</label>
+            
+            <div style="background:white; padding:10px; margin-top:10px; border:1px solid #004a98; border-radius:5px;">
+                <input type="radio" name="pago" checked> 💳 Tarjeta de Crédito/Débito
+                <div style="margin-top:10px; padding-left:20px;">
+                    <input type="text" placeholder="Número de Tarjeta" style="width:90%">
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" placeholder="MM/AA" style="width:40%">
+                        <input type="text" placeholder="CVV" style="width:40%">
+                    </div>
+                </div>
+            </div>
+
+            <div style="background:white; padding:10px; margin-top:10px; border:1px solid #ccc; border-radius:5px;">
+                <input type="radio" name="pago"> 💵 Pago en Efectivo (Caja)
+                <p style="margin-left:20px; font-size:10px;">Pagas al recoger tu pedido.</p>
+            </div>
+
+            <button>CONFIRMAR ORDEN</button>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">6. Mis Pedidos (Seguimiento)</div>
+        <div class="status-bar"><span>12:15</span><span>85%</span></div>
+        <div class="app-header">Mis Pedidos</div>
+        <div class="screen-content">
+            <div style="display:flex; margin-bottom:15px;">
+                <button style="margin:0; border-radius:5px 0 0 5px;">Activos</button>
+                <button class="secondary" style="margin:0; border-radius:0 5px 5px 0;">Historial</button>
+            </div>
+
+            <div style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                <div style="display:flex; justify-content:space-between;">
+                    <strong>Orden #8902</strong>
+                    <span style="color:#004a98; font-weight:bold;">En Cola</span>
+                </div>
+                <p>3 Artículos - Total: $112.00</p>
+                
+                <div style="background:#eee; height:8px; border-radius:4px; margin:10px 0;">
+                    <div style="background:#ffc107; width:30%; height:100%; border-radius:4px;"></div>
+                </div>
+                <p style="text-align:center; font-size:10px;">Tu pedido está en espera de preparación</p>
+
+                <button class="danger" style="font-size:12px; padding:8px;">CANCELAR PEDIDO (CU-15)</button>
+            </div>
+
+            <div style="margin-top:20px; text-align:center; color:#999; font-size:12px;">
+                No hay más pedidos activos.
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item">🏠</div>
+            <div class="nav-item active">📋</div>
+            <div class="nav-item">👤</div>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">7. Pedido Listo (Entrega)</div>
+        <div class="status-bar"><span>12:30</span><span>80%</span></div>
+        <div class="app-header">Detalle de Orden</div>
+        <div class="screen-content" style="text-align:center;">
+            
+            <div style="background:#d4edda; color:#155724; padding:10px; border-radius:5px; margin-bottom:20px;">
+                ¡Tu pedido está listo!
+            </div>
+
+            <div style="font-size:80px;">🔳</div> <h3>Orden #8902</h3>
+            
+            <p>Muestra este código en mostrador</p>
+
+            <div style="text-align:left; background:white; padding:15px; border-radius:10px; margin-top:20px;">
+                <p><strong>Estado Pago:</strong> <span style="color:green;">Pagado (Tarjeta)</span></p>
+                <hr style="border:0; border-top:1px solid #eee;">
+                <p>2x Burrito Machaca</p>
+                <p>1x Coca Cola</p>
+            </div>
+
+            <button class="secondary">Volver al Inicio</button>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">8. Admin: Inventario</div>
+        <div class="status-bar"><span>09:00</span><span>100%</span></div>
+        <div class="app-header" style="background-color:#333;">Admin Panel</div>
+        <div class="screen-content">
+            <h2 style="text-align:center;">Gestión de Productos</h2>
+            
+            <button style="margin-bottom:20px;">+ AGREGAR PRODUCTO (CU-18)</button>
+
+            <div class="product-card">
+                <div class="product-img"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:bold;">Burrito Machaca</div>
+                    <div style="font-size:11px;">Stock: 15 | Precio: $45</div>
+                </div>
+                <button class="secondary" style="width:auto; height:30px; padding:0 10px; margin:0; font-size:10px;">EDITAR</button>
+            </div>
+
+            <div style="background:#fff; border:1px solid #999; padding:10px; border-radius:5px; margin-top:10px;">
+                <h4 style="margin:0 0 10px;">Editando: Burrito Machaca</h4>
+                <label>Stock Actual</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="number" value="15">
+                    <button style="margin:5px 0 0 0; width:auto;">Actualizar</button>
+                </div>
+                <label>Precio</label>
+                <input type="number" value="45.00">
+            </div>
+
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item active">📦</div> <div class="nav-item">⚠️</div> <div class="nav-item">📊</div> </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="screen-title">9. Admin: Cancelaciones</div>
+        <div class="status-bar"><span>09:15</span><span>98%</span></div>
+        <div class="app-header" style="background-color:#333;">Ordenes Activas</div>
+        <div class="screen-content">
+            
+            <div style="background:white; padding:10px; border-radius:5px; border-left:5px solid green; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between;">
+                    <strong>#8903 - Ana G.</strong>
+                    <span>En Preparación</span>
+                </div>
+                <p>1x Torta, 1x Jugo</p>
+                <button class="danger" style="font-size:11px; padding:5px;">CANCELAR ORDEN (INCIDENTE)</button>
+            </div>
+
+            <div style="background:white; padding:10px; border-radius:5px; border-left:5px solid orange; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between;">
+                    <strong>#8904 - Luis P.</strong>
+                    <span>En Cola (Ingeniería)</span>
+                </div>
+                <p>2x Molletes</p>
+            </div>
+
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item">📦</div>
+            <div class="nav-item active">⚠️</div>
+            <div class="nav-item">📊</div>
+        </div>
+    </div>
+
+</body>
+</html>

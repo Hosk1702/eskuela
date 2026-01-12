@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1766113444 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\tienda\main.cpp
+	<iostream>
+	"funciones.h"
+
+1766112119 c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\tienda\funciones.h
+	<string>
+	<vector>
+
+1766113428 source:c:\users\nadaq\documents\github\eskuela\est datos\pror mirsa\tienda\funciones.cpp
+	"funciones.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<cstdlib>
+	<iomanip>
+
